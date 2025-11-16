@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta-name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>TikTok Coins Mock</title>
     <link rel="stylesheet" href="style.css">
 </head>
@@ -32,7 +32,7 @@
     <!-- Coins Grid -->
     <div id="coinsGrid" class="grid"></div>
 
-    <!-- TikTok Banner -->
+    <!-- TikTok Extra Banner -->
     <div class="extra-img-box">
         <img src="images/extra_banner.jpg" class="extra-img">
     </div>
@@ -67,7 +67,7 @@
 
     <!-- Success Modal -->
     <div id="successModal" class="modal">
-        <div class="modal-box" style="text-align:center">
+        <div class="modal-box">
             <img id="checkmark" src="images/check_success.svg">
             <div id="successText">Payment completed</div>
             <div id="coins">Recharged 0 Coins</div>
@@ -75,20 +75,23 @@
         </div>
     </div>
 
-    <!-- Custom Coins Modal -->
+    <!-- Custom Coins Popup -->
     <div id="customModal" class="modal">
         <div class="modal-box" style="text-align:center">
-
             <h2>Select Coin Amount</h2>
-            <div id="customRange">30 - 2,500,000</div>
 
-            <!-- 新版：取代舊 customCoins 外部欄位 -->
-            <div id="customInputBox" class="custom-box">0</div>
+            <div id="customRange" style="margin:10px 0 20px 0; font-size:16px; color:#666;">
+                30 - 2,500,000
+            </div>
 
-            <!-- 匯率顯示（取代外面舊的 summary） -->
-            <div id="customPopupSummary">
-                <div id="popupCoins">0 Coins</div>
-                <div id="popupUSD">US$0.00</div>
+            <!-- Input + Summary -->
+            <div style="margin-bottom: 12px;">
+                <div id="customInputBox"
+                    style="padding:12px;border:1px solid #ddd;border-radius:12px;margin-bottom:10px;font-size:22px;">
+                    0
+                </div>
+                <div id="customModalCoins" style="font-size:16px; color:#333;">0 Coins</div>
+                <div id="customModalUSD" style="font-size:16px; color:#333;">US$0.00</div>
             </div>
 
             <!-- Number Pad -->
@@ -109,7 +112,8 @@
                 <button class="num">0</button>
             </div>
 
-            <div class="modal-actions" style="margin-top:20px;">
+            <!-- Buttons -->
+            <div style="display:flex; gap:14px; margin-top:18px;">
                 <button id="customCancel" class="modal-btn-red" style="background:#ccc;">Cancel</button>
                 <button id="customApply" class="modal-btn-red">Apply</button>
             </div>
@@ -122,6 +126,6 @@
         <div class="loading-text">Processing...</div>
     </div>
 
-<script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
