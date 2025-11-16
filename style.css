@@ -90,3 +90,39 @@ body { background:white; padding-bottom:60px; }
     .custom-box { width:520px; height:auto; border-radius:18px; align-self:center; }
     .modal.bottom { align-items:center; }
 }
+/* --- Enlarge coin cards --- */
+.grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px; /* 卡片間距大一點更像TikTok */
+}
+
+.card {
+    padding: 24px 0;  /* 讓卡片更高 */
+    border-radius: 18px;
+    font-size: 18px;
+}
+
+/* Coin icon bigger */
+.card .icon {
+    width: 58px;
+    height: 58px;
+    margin-bottom: 10px;
+}
+
+/* Amount bigger */
+.card .amount {
+    font-size: 22px;
+    font-weight: 700;
+}
+
+/* USD bigger */
+.card .usd {
+    font-size: 17px;
+    margin-top: 4px;
+}
+
+/* Selected border thicker & brighter */
+.card.selected {
+    border: 3px solid #ff2d55;
+    background: #ffeaf0;
+}
