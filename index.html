@@ -84,7 +84,53 @@
             <button id="goBack" class="btn">Go Back</button>
         </div>
     </div>
+<!-- Custom Coins Popup -->
+<div id="customModal" class="modal">
+    <div class="modal-box" style="text-align:center">
+        <h2>Select Coin Amount</h2>
 
+        <div id="customRange" style="margin:10px 0 20px 0; font-size:16px; color:#666;">
+            30 - 2,500,000
+        </div>
+
+        <div id="customInputBox" style="
+            padding:12px;
+            border:1px solid #ddd;
+            border-radius:12px;
+            margin-bottom:18px;
+            font-size:18px;
+        ">0</div>
+
+        <!-- Number Pad -->
+        <div class="number-grid">
+            <button class="num">1</button>
+            <button class="num">2</button>
+            <button class="num">3</button>
+            <button class="del">⌫</button>
+
+            <button class="num">4</button>
+            <button class="num">5</button>
+            <button class="num">6</button>
+            <button class="num">000</button>
+
+            <button class="num">7</button>
+            <button class="num">8</button>
+            <button class="num">9</button>
+            <button class="num">0</button>
+        </div>
+
+        <!-- Buttons -->
+        <div style="display:flex; gap:14px; margin-top:18px;">
+            <button id="customCancel" class="modal-btn-red" style="background:#ccc;">
+                Cancel
+            </button>
+
+            <button id="customApply" class="modal-btn-red">
+                Apply
+            </button>
+        </div>
+    </div>
+</div>
     <!-- Loading Animation -->
     <div id="loading" class="loading hidden">
         <div class="spinner"></div>
@@ -94,6 +140,7 @@
 <script src="script.js"></script>
 </body>
 </html>
+
 
 
 
