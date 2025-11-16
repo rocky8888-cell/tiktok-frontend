@@ -126,3 +126,13 @@ body { background:white; padding-bottom:60px; }
     border: 3px solid #ff2d55;
     background: #ffeaf0;
 }
+/* 放大金幣選項卡片 */
+.card {
+    transform: scale(1.15);   /* 放大 15% */
+    transform-origin: center;
+}
+
+/* 放大後避免卡片擠在一起，增加間距 */
+.grid {
+    gap: 22px !important;
+}
