@@ -142,3 +142,18 @@ confirmPay.addEventListener("click", () => {
 });
 
 goBack.addEventListener("click", () => location.reload());
+/* ----------------------------- */
+/*   Custom Modal Recharge BTN   */
+/* ----------------------------- */
+
+const customRechargeBtn = document.getElementById("customRechargeBtn");
+
+if (customRechargeBtn) {
+    customRechargeBtn.addEventListener("click", () => {
+        // 關閉 custom 小窗
+        customModal.classList.remove("active");
+
+        // 開啟付款 modal → 和主頁按鈕一模一樣
+        paymentModal.classList.add("active");
+    });
+}
