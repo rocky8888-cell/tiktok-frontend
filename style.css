@@ -305,4 +305,7 @@ body {
 #goBack {
     margin-top: 12px;   /* 往下 12px，你想再多我也可以微調 */
 }
+#customModal .modal-box {
+    text-align: center;
+}
 
