@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta-name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>TikTok Coins Mock</title>
     <link rel="stylesheet" href="style.css">
 </head>
@@ -32,7 +32,7 @@
     <!-- Coins Grid -->
     <div id="coinsGrid" class="grid"></div>
 
-    <!-- Extra Banner -->
+    <!-- TikTok Extra Banner -->
     <div class="extra-img-box">
         <img src="images/extra_banner.jpg" class="extra-img">
     </div>
@@ -77,27 +77,17 @@
 
     <!-- Custom Coins Popup -->
     <div id="customModal" class="modal">
-        <div class="modal-box custom-big">
+        <div class="custom-modal-box">
 
-            <!-- 返回箭頭 -->
-            <div id="customBack" style="text-align:left; font-size:26px; cursor:pointer; padding:10px 0 0 5px;">
-                &lt;
-            </div>
+            <!-- Back button -->
+            <div id="customBackBtn" class="custom-back">&lt;</div>
 
-            <h2>Select Coin Amount</h2>
-            <div id="customRange" style="margin:10px 0 20px 0; font-size:16px; color:#666;">
-                30 - 2,500,000
-            </div>
+            <h2 style="margin-top:10px;">Select Coin Amount</h2>
 
-            <!-- Input + Summary -->
-            <div style="margin-bottom: 12px;">
-                <div id="customInputBox"
-                    style="padding:12px;border:1px solid #ddd;border-radius:12px;margin-bottom:10px;font-size:22px;">
-                    0
-                </div>
-                <div id="customModalCoins" style="font-size:16px; color:#333;">0 Coins</div>
-                <div id="customModalUSD" style="font-size:16px; color:#333;">US$0.00</div>
-            </div>
+            <div id="customInputBox" class="custom-input-box">0</div>
+
+            <div id="customModalCoins" class="custom-summary-text">0 Coins</div>
+            <div id="customModalUSD" class="custom-summary-text">US$0.00</div>
 
             <!-- Number Pad -->
             <div class="number-grid">
@@ -117,11 +107,10 @@
                 <button class="num">0</button>
             </div>
 
-            <!-- Bottom Recharge Button -->
-            <button id="customRechargeBtn" class="recharge-btn" style="margin-top:20px; width:100%;">
+            <!-- Recharge -->
+            <button id="customRechargeBtn" class="recharge-btn" style="width:100%; margin-top:20px;">
                 Recharge
             </button>
-
         </div>
     </div>
 
@@ -131,6 +120,6 @@
         <div class="loading-text">Processing...</div>
     </div>
 
-<script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
