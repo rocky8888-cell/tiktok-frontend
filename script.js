@@ -1,4 +1,4 @@
-/* 固定方案 */
+/* TikTok 美區固定方案 */
 const coinsData = [
     { amount: 30, usd: 0.42 },
     { amount: 350, usd: 4.95 },
@@ -14,27 +14,24 @@ const grid = document.getElementById("coinsGrid");
 coinsData.forEach(item => {
     const div = document.createElement("div");
     div.className = "card";
-
     div.innerHTML = `
         <img src="images/coin.png" class="icon">
         <div class="amount">${item.amount}</div>
         <div class="usd">US$${item.usd}</div>
     `;
-
     div.addEventListener("click", () => {
 
-        // Custom → 開啟小窗
+        // Custom → 彈出彈窗
         if (item.amount === "Custom") {
             customModal.classList.add("active");
             customInputBox.innerText = "0";
-            updateCustomPreview(0);
+            updateCustomPreview(0); // ← 修正：開啟時更新匯率區域
             return;
         }
 
-        // 清除其他選取
+        // 固定方案
         document.querySelectorAll(".card").forEach(c => c.classList.remove("selected"));
         div.classList.add("selected");
-
         selectItem(item);
     });
 
@@ -43,54 +40,142 @@ coinsData.forEach(item => {
 
 let selected = null;
 
-/* 選取固定方案 */
+/* Select fixed coin packages */
 function selectItem(item) {
     selected = item;
 
-    document.getElementById("selectedText").innerText = `Selected: ${item.amount} Coins`;
-    document.getElementById("selectedUSD").innerText = `US$${item.usd}`;
+    document.getElementById("selectedText").innerText =
+        `Selected: ${item.amount} Coins`;
+
+    document.getElementById("selectedUSD").innerText =
+        `US$${item.usd}`;
+
     document.getElementById("payBtn").disabled = false;
 }
 
-/* ====================================================== */
-/*                     Custom Coins                       */
-/* ====================================================== */
+/* Custom coins 輸入框（你保留用不到，但我不改動） */
+const customInput = document.getElementById("customCoins");
+const customSummaryCoins = document.getElementById("customCoinsCount");
+const customSummaryUSD = document.getElementById("customCoinsUSD");
+
+customInput.addEventListener("input", () => {
+    const val = Number(customInput.value);
+
+    if (!val || val <= 0) {
+        selected = null;
+        customSummaryCoins.innerText = "0 Coins";
+        customSummaryUSD.innerText = "US$0.00";
+        document.getElementById("payBtn").disabled = true;
+        return;
+    }
+
+    const usd = (val * 0.013).toFixed(2);
+
+    customSummaryCoins.innerText = `${val} Coins`;
+    customSummaryUSD.innerText = `US$${usd}`;
+
+    selected = { amount: val, usd: usd };
+
+    document.getElementById("selectedText").innerText = `Selected: ${val} Coins`;
+    document.getElementById("selectedUSD").innerText = `US$${usd}`;
+    document.getElementById("payBtn").disabled = false;
+});
+
+/* Payment Modal */
+const payBtn = document.getElementById("payBtn");
+const paymentModal = document.getElementById("paymentModal");
+const cancelPay = document.getElementById("cancelPay");
+const confirmPay = document.getElementById("confirmPay");
+
+payBtn.addEventListener("click", () => {
+    paymentModal.classList.add("active");
+});
+
+cancelPay.addEventListener("click", () => {
+    paymentModal.classList.remove("active");
+});
+
+/* Success Modal + Loading */
+const successModal = document.getElementById("successModal");
+const coinsResult = document.getElementById("coins");
+const goBack = document.getElementById("goBack");
+
+const loading = document.getElementById("loading");
+
+confirmPay.addEventListener("click", () => {
+    paymentModal.classList.remove("active");
+
+    loading.classList.remove("hidden");
+
+    setTimeout(() => {
+        loading.classList.add("hidden");
+
+        coinsResult.innerText = `Recharged ${selected.amount} Coins`;
+        successModal.classList.add("active");
+
+    }, 3500);
+});
+
+goBack.addEventListener("click", () => {
+    location.reload();
+});
+
+/* ----------------------------- */
+/*     Payment Method Active     */
+/* ----------------------------- */
+
+const methods = document.querySelectorAll(".method");
+methods.forEach(m => {
+    m.addEventListener("click", () => {
+        methods.forEach(x => x.classList.remove("active"));
+        m.classList.add("active");
+    });
+});
+
+/* ----------------------------- */
+/*   Custom Popup Logic          */
+/* ----------------------------- */
+
 const customModal = document.getElementById("customModal");
 const customInputBox = document.getElementById("customInputBox");
 const customCancel = document.getElementById("customCancel");
 const customApply = document.getElementById("customApply");
 
-const popupCoins = document.getElementById("popupCoins");
-const popupUSD = document.getElementById("popupUSD");
+// 匯率顯示（彈窗裡）
+// 你 HTML 一定要有：
+// <div id="popupSummaryCoins"></div>
+// <div id="popupSummaryUSD"></div>
+const popupSummaryCoins = document.getElementById("popupSummaryCoins");
+const popupSummaryUSD = document.getElementById("popupSummaryUSD");
 
-/* 更新匯率顯示 */
+// 更新匯率（彈窗）
 function updateCustomPreview(val) {
-    const usd = (val * 0.013).toFixed(2);
+    const coins = Number(val) || 0;
+    const usd = (coins * 0.013).toFixed(2);
 
-    popupCoins.innerText = `${val} Coins`;
-    popupUSD.innerText = `US$${usd}`;
+    popupSummaryCoins.innerText = `${coins} Coins`;
+    popupSummaryUSD.innerText = `US$${usd}`;
 }
 
-/* Keypad 按鍵 */
+/* 點數字按鈕 */
 document.querySelectorAll(".num").forEach(btn => {
     btn.addEventListener("click", () => {
         let current = customInputBox.innerText;
-
         if (current === "0") current = "";
         const newVal = current + btn.innerText;
-
         customInputBox.innerText = newVal;
-        updateCustomPreview(Number(newVal));
+
+        updateCustomPreview(newVal);  // ← ⭐ 每次按鍵都更新
     });
 });
 
-/* 刪除鍵 */
+/* 刪除按鈕 */
 document.querySelector(".del").addEventListener("click", () => {
     let val = customInputBox.innerText;
-    val = val.length > 1 ? val.slice(0, -1) : "0";
+    let newVal = val.length > 1 ? val.slice(0, -1) : "0";
+    customInputBox.innerText = newVal;
 
-    customInputBox.innerText = val;
-    updateCustomPreview(Number(val));
+    updateCustomPreview(newVal); // ← ⭐ 刪除也更新
 });
 
 /* Cancel */
@@ -100,7 +185,7 @@ customCancel.addEventListener("click", () => {
 
 /* Apply */
 customApply.addEventListener("click", () => {
-    const val = Number(customInputBox.innerText);
+    let val = Number(customInputBox.innerText);
     if (!val || val <= 0) return;
 
     const usd = (val * 0.013).toFixed(2);
@@ -112,51 +197,4 @@ customApply.addEventListener("click", () => {
     document.getElementById("payBtn").disabled = false;
 
     customModal.classList.remove("active");
-});
-
-/* ====================================================== */
-/*                     Payment Modal                      */
-/* ====================================================== */
-const payBtn = document.getElementById("payBtn");
-const paymentModal = document.getElementById("paymentModal");
-const cancelPay = document.getElementById("cancelPay");
-const confirmPay = document.getElementById("confirmPay");
-
-payBtn.addEventListener("click", () => {
-    paymentModal.classList.add("active");
-});
-cancelPay.addEventListener("click", () => {
-    paymentModal.classList.remove("active");
-});
-
-/* Payment Method */
-const methods = document.querySelectorAll(".method");
-methods.forEach(m => {
-    m.addEventListener("click", () => {
-        methods.forEach(x => x.classList.remove("active"));
-        m.classList.add("active");
-    });
-});
-
-/* ====================================================== */
-/*               Loading + Success Modal                  */
-/* ====================================================== */
-const successModal = document.getElementById("successModal");
-const coinsResult = document.getElementById("coins");
-const goBack = document.getElementById("goBack");
-const loading = document.getElementById("loading");
-
-confirmPay.addEventListener("click", () => {
-    paymentModal.classList.remove("active");
-    loading.classList.remove("hidden");
-
-    setTimeout(() => {
-        loading.classList.add("hidden");
-        coinsResult.innerText = `Recharged ${selected.amount} Coins`;
-        successModal.classList.add("active");
-    }, 3500);
-});
-
-goBack.addEventListener("click", () => {
-    location.reload();
 });
