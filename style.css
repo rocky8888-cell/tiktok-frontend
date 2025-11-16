@@ -308,4 +308,22 @@ body {
 #customModal .modal-box {
     text-align: center;
 }
+.number-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-top: 10px;
+}
+
+.number-grid button {
+    padding: 16px 0;
+    font-size: 20px;
+    border: none;
+    background: #f5f5f5;
+    border-radius: 12px;
+}
+
+.del {
+    font-size: 20px !important;
+}
 
