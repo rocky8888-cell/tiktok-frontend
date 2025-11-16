@@ -172,6 +172,64 @@ popupApply.addEventListener("click", () => {
     document.getElementById("payBtn").disabled = false;
     customModal.classList.remove("active");
 });
+const customModal = document.getElementById("customModal");
+const customInputBox = document.getElementById("customInputBox");
+const customCancel = document.getElementById("customCancel");
+const customApply = document.getElementById("customApply");
+
+let customTemp = "";
+
+// 打開 Custom 小窗
+document.querySelectorAll(".card").forEach(card => {
+    card.addEventListener("click", () => {
+        if (card.querySelector(".amount").innerText === "Custom") {
+            customTemp = "";
+            customInputBox.innerText = "0";
+            customModal.classList.add("active");
+        }
+    });
+});
+
+// 數字鍵
+document.querySelectorAll(".num").forEach(btn => {
+    btn.addEventListener("click", () => {
+        customTemp += btn.innerText;
+        customInputBox.innerText = customTemp;
+    });
+});
+
+// 刪除鍵
+document.querySelector(".del").addEventListener("click", () => {
+    customTemp = customTemp.slice(0, -1);
+    customInputBox.innerText = customTemp || "0";
+});
+
+// Cancel
+customCancel.addEventListener("click", () => {
+    customModal.classList.remove("active");
+});
+
+// Apply
+customApply.addEventListener("click", () => {
+
+    let val = Number(customTemp);
+
+    if (val <= 0) return;
+
+    const usd = (val * 0.013).toFixed(2);
+
+    document.getElementById("selectedText").innerText =
+        `Selected: ${val} Coins`;
+
+    document.getElementById("selectedUSD").innerText =
+        `US$${usd}`;
+
+    selected = { amount: val, usd: usd };
+
+    document.getElementById("payBtn").disabled = false;
+
+    customModal.classList.remove("active");
+});
 
 
 
