@@ -20,6 +20,15 @@ coinsData.forEach(item => {
         <div class="usd">US$${item.usd}</div>
     `;
     div.addEventListener("click", () => {
+
+    // 如果是 Custom → 打開輸入器，不選擇固定方案
+    if (item.amount === "Custom") {
+        customModal.classList.add("active");
+        customInputBox.innerText = "0";
+        return; // ← 停止，不要去跑 selectItem()
+    }
+
+    // 一般固定方案
     document.querySelectorAll(".card").forEach(c => c.classList.remove("selected"));
     div.classList.add("selected");
     selectItem(item);
@@ -179,5 +188,6 @@ customApply.addEventListener("click", () => {
 
     customModal.classList.remove("active");
 });
+
 
 
