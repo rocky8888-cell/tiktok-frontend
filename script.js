@@ -1,4 +1,6 @@
-/* TikTok 美區固定方案 */
+/* ================================
+   TikTok 美區固定方案
+================================ */
 const coinsData = [
     { amount: 30, usd: 0.42 },
     { amount: 350, usd: 4.95 },
@@ -10,7 +12,9 @@ const coinsData = [
 
 const grid = document.getElementById("coinsGrid");
 
-/* Render Cards */
+/* ================================
+   Render Cards
+================================ */
 coinsData.forEach(item => {
     const div = document.createElement("div");
     div.className = "card";
@@ -19,26 +23,29 @@ coinsData.forEach(item => {
         <div class="amount">${item.amount}</div>
         <div class="usd">US$${item.usd}</div>
     `;
+
     div.addEventListener("click", () => {
+        // 點到 Custom → 直接開輸入器
+        if (item.amount === "Custom") {
+            customModal.classList.add("active");
+            customInputBox.innerText = "0";
+            return;
+        }
 
-    // 如果是 Custom → 打開輸入器，不選擇固定方案
-    if (item.amount === "Custom") {
-        customModal.classList.add("active");
-        customInputBox.innerText = "0";
-        return; // ← 停止，不要去跑 selectItem()
-    }
+        // 一般固定方案
+        document.querySelectorAll(".card").forEach(c => c.classList.remove("selected"));
+        div.classList.add("selected");
+        selectItem(item);
+    });
 
-    // 一般固定方案
-    document.querySelectorAll(".card").forEach(c => c.classList.remove("selected"));
-    div.classList.add("selected");
-    selectItem(item);
-});
     grid.appendChild(div);
 });
 
 let selected = null;
 
-/* Select fixed coin packages */
+/* ================================
+   Select fixed coin packages
+================================ */
 function selectItem(item) {
     selected = item;
 
@@ -51,7 +58,9 @@ function selectItem(item) {
     document.getElementById("payBtn").disabled = false;
 }
 
-/* Custom coins */
+/* ================================
+   Custom coins (輸入框那個)
+================================ */
 const customInput = document.getElementById("customCoins");
 const customSummaryCoins = document.getElementById("customCoinsCount");
 const customSummaryUSD = document.getElementById("customCoinsUSD");
@@ -67,7 +76,6 @@ customInput.addEventListener("input", () => {
         return;
     }
 
-    /* 🔥 TikTok 美區匯率：70 coins = 0.91 → 1 coin = 0.013 USD */
     const usd = (val * 0.013).toFixed(2);
 
     customSummaryCoins.innerText = `${val} Coins`;
@@ -75,22 +83,21 @@ customInput.addEventListener("input", () => {
 
     selected = { amount: val, usd: usd };
 
-    document.getElementById("selectedText").innerText =
-        `Selected: ${val} Coins`;
-
-    document.getElementById("selectedUSD").innerText =
-        `US$${usd}`;
-
+    document.getElementById("selectedText").innerText = `Selected: ${val} Coins`;
+    document.getElementById("selectedUSD").innerText = `US$${usd}`;
     document.getElementById("payBtn").disabled = false;
 });
 
-/* Payment Modal */
+/* ================================
+   Payment Modal
+================================ */
 const payBtn = document.getElementById("payBtn");
 const paymentModal = document.getElementById("paymentModal");
 const cancelPay = document.getElementById("cancelPay");
 const confirmPay = document.getElementById("confirmPay");
 
 payBtn.addEventListener("click", () => {
+    if (!selected) return;
     paymentModal.classList.add("active");
 });
 
@@ -98,11 +105,12 @@ cancelPay.addEventListener("click", () => {
     paymentModal.classList.remove("active");
 });
 
-/* Success Modal + Loading */
+/* ================================
+   Success Modal + Loading
+================================ */
 const successModal = document.getElementById("successModal");
 const coinsResult = document.getElementById("coins");
 const goBack = document.getElementById("goBack");
-
 const loading = document.getElementById("loading");
 
 confirmPay.addEventListener("click", () => {
@@ -122,10 +130,10 @@ confirmPay.addEventListener("click", () => {
 goBack.addEventListener("click", () => {
     location.reload();
 });
-/* ----------------------------- */
-/*     Payment Method Active     */
-/* ----------------------------- */
 
+/* ================================
+   Payment Method Active
+================================ */
 const methods = document.querySelectorAll(".method");
 
 methods.forEach(m => {
@@ -134,19 +142,16 @@ methods.forEach(m => {
         m.classList.add("active");
     });
 });
-/* ----------------------------- */
-/*   Custom Popup Logic          */
-/* ----------------------------- */
 
+/* ================================
+   Custom Popup Logic (數字鍵盤)
+================================ */
 const customModal = document.getElementById("customModal");
 const customInputBox = document.getElementById("customInputBox");
 const customCancel = document.getElementById("customCancel");
 const customApply = document.getElementById("customApply");
 
-/* 打開 Custom Modal */
-
-
-/* 點數字按鈕 */
+// 點數字按鈕
 document.querySelectorAll(".num").forEach(btn => {
     btn.addEventListener("click", () => {
         let current = customInputBox.innerText;
@@ -155,18 +160,18 @@ document.querySelectorAll(".num").forEach(btn => {
     });
 });
 
-/* 刪除按鈕 */
+// 刪除鍵
 document.querySelector(".del").addEventListener("click", () => {
     let val = customInputBox.innerText;
     customInputBox.innerText = val.length > 1 ? val.slice(0, -1) : "0";
 });
 
-/* Cancel */
+// 取消
 customCancel.addEventListener("click", () => {
     customModal.classList.remove("active");
 });
 
-/* Apply */
+// 確定（Apply）
 customApply.addEventListener("click", () => {
     let val = Number(customInputBox.innerText);
     if (!val || val <= 0) return;
@@ -181,7 +186,3 @@ customApply.addEventListener("click", () => {
 
     customModal.classList.remove("active");
 });
-
-
-
-
