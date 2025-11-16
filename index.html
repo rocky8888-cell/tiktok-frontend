@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta-name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>TikTok Coins Mock</title>
     <link rel="stylesheet" href="style.css">
 </head>
@@ -31,17 +31,10 @@
 
     <!-- Coins Grid -->
     <div id="coinsGrid" class="grid"></div>
-    <!-- TikTok Extra Banner -->
-<div class="extra-img-box">
-    <img src="images/extra_banner.jpg" class="extra-img">
-</div>
-    <!-- Custom Input -->
-    <div class="custom-row">
-        <input id="customCoins" type="number" placeholder="Custom coins (e.g. 1000)">
-        <div class="custom-summary">
-            <div id="customCoinsCount">0 Coins</div>
-            <div id="customCoinsUSD">US$0.00</div>
-        </div>
+
+    <!-- TikTok Banner -->
+    <div class="extra-img-box">
+        <img src="images/extra_banner.jpg" class="extra-img">
     </div>
 
     <!-- Selected Summary -->
@@ -60,78 +53,70 @@
 
             <div class="method-row">
                 <div class="method"><img class="payicon" src="images/pay_applepay.svg"> Apple Pay</div>
-                <div class="method">
-    <img class="payicon visa-icon" src="images/visa_logo.png">
-    Visa ******61941
-</div>
+                <div class="method"><img class="payicon visa-icon" src="images/visa_logo.png"> Visa ******61941</div>
                 <div class="method"><img class="payicon" src="images/pay_paypal.svg"> PayPal</div>
                 <div class="method"><img class="payicon" src="images/pay_mastercard.svg"> Mastercard</div>
             </div>
 
             <div class="modal-actions">
-    <button id="cancelPay" class="modal-btn-red">Cancel</button>
-    <button id="confirmPay" class="modal-btn-red">Recharge</button>
-</div>
+                <button id="cancelPay" class="modal-btn-red">Cancel</button>
+                <button id="confirmPay" class="modal-btn-red">Recharge</button>
+            </div>
         </div>
     </div>
 
     <!-- Success Modal -->
     <div id="successModal" class="modal">
-        <div class="modal-box">
+        <div class="modal-box" style="text-align:center">
             <img id="checkmark" src="images/check_success.svg">
             <div id="successText">Payment completed</div>
             <div id="coins">Recharged 0 Coins</div>
             <button id="goBack" class="btn">Go Back</button>
         </div>
     </div>
-<!-- Custom Coins Popup -->
-<div id="customModal" class="modal">
-    <div class="modal-box" style="text-align:center">
-        <h2>Select Coin Amount</h2>
 
-        <div id="customRange" style="margin:10px 0 20px 0; font-size:16px; color:#666;">
-            30 - 2,500,000
-        </div>
+    <!-- Custom Coins Modal -->
+    <div id="customModal" class="modal">
+        <div class="modal-box" style="text-align:center">
 
-        <div id="customInputBox" style="
-            padding:12px;
-            border:1px solid #ddd;
-            border-radius:12px;
-            margin-bottom:18px;
-            font-size:18px;
-        ">0</div>
+            <h2>Select Coin Amount</h2>
+            <div id="customRange">30 - 2,500,000</div>
 
-        <!-- Number Pad -->
-        <div class="number-grid">
-            <button class="num">1</button>
-            <button class="num">2</button>
-            <button class="num">3</button>
-            <button class="del">⌫</button>
+            <!-- 新版：取代舊 customCoins 外部欄位 -->
+            <div id="customInputBox" class="custom-box">0</div>
 
-            <button class="num">4</button>
-            <button class="num">5</button>
-            <button class="num">6</button>
-            <button class="num">000</button>
+            <!-- 匯率顯示（取代外面舊的 summary） -->
+            <div id="customPopupSummary">
+                <div id="popupCoins">0 Coins</div>
+                <div id="popupUSD">US$0.00</div>
+            </div>
 
-            <button class="num">7</button>
-            <button class="num">8</button>
-            <button class="num">9</button>
-            <button class="num">0</button>
-        </div>
+            <!-- Number Pad -->
+            <div class="number-grid">
+                <button class="num">1</button>
+                <button class="num">2</button>
+                <button class="num">3</button>
+                <button class="del">⌫</button>
 
-        <!-- Buttons -->
-        <div style="display:flex; gap:14px; margin-top:18px;">
-            <button id="customCancel" class="modal-btn-red" style="background:#ccc;">
-                Cancel
-            </button>
+                <button class="num">4</button>
+                <button class="num">5</button>
+                <button class="num">6</button>
+                <button class="num">000</button>
 
-            <button id="customApply" class="modal-btn-red">
-                Apply
-            </button>
+                <button class="num">7</button>
+                <button class="num">8</button>
+                <button class="num">9</button>
+                <button class="num">0</button>
+            </div>
+
+            <div class="modal-actions" style="margin-top:20px;">
+                <button id="customCancel" class="modal-btn-red" style="background:#ccc;">Cancel</button>
+                <button id="customApply" class="modal-btn-red">Apply</button>
+            </div>
         </div>
     </div>
-</div>
-    <!-- Loading Animation -->
+
+    <!-- Loading -->
     <div id="loading" class="loading hidden">
         <div class="spinner"></div>
         <div class="loading-text">Processing...</div>
@@ -140,16 +125,3 @@
 <script src="script.js"></script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
