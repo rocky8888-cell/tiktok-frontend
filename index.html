@@ -32,7 +32,7 @@
     <!-- Coins Grid -->
     <div id="coinsGrid" class="grid"></div>
 
-    <!-- TikTok Extra Banner -->
+    <!-- Extra Banner -->
     <div class="extra-img-box">
         <img src="images/extra_banner.jpg" class="extra-img">
     </div>
@@ -79,18 +79,24 @@
     <div id="customModal" class="modal">
         <div class="modal-box custom-big">
 
-            <h2>Select Coin Amount</h2>
+            <!-- 返回箭頭 -->
+            <div id="customBack" style="text-align:left; font-size:26px; cursor:pointer; padding:10px 0 0 5px;">
+                &lt;
+            </div>
 
+            <h2>Select Coin Amount</h2>
             <div id="customRange" style="margin:10px 0 20px 0; font-size:16px; color:#666;">
-                30 – 2,500,000
+                30 - 2,500,000
             </div>
 
             <!-- Input + Summary -->
-            <div style="margin-bottom: 14px;">
-                <div id="customInputBox" class="custom-input">0</div>
-
-                <div id="customModalCoins" class="custom-summary">0 Coins</div>
-                <div id="customModalUSD" class="custom-summary">US$0.00</div>
+            <div style="margin-bottom: 12px;">
+                <div id="customInputBox"
+                    style="padding:12px;border:1px solid #ddd;border-radius:12px;margin-bottom:10px;font-size:22px;">
+                    0
+                </div>
+                <div id="customModalCoins" style="font-size:16px; color:#333;">0 Coins</div>
+                <div id="customModalUSD" style="font-size:16px; color:#333;">US$0.00</div>
             </div>
 
             <!-- Number Pad -->
@@ -111,13 +117,7 @@
                 <button class="num">0</button>
             </div>
 
-            <!-- Apply / Cancel -->
-            <div style="display:flex; gap:14px; margin-top:18px;">
-                <button id="customCancel" class="modal-btn-red" style="background:#ccc;">Cancel</button>
-                <button id="customApply" class="modal-btn-red">Apply</button>
-            </div>
-
-            <!-- ⚡ NEW Recharge button -->
+            <!-- Bottom Recharge Button -->
             <button id="customRechargeBtn" class="recharge-btn" style="margin-top:20px; width:100%;">
                 Recharge
             </button>
@@ -131,6 +131,6 @@
         <div class="loading-text">Processing...</div>
     </div>
 
-    <script src="script.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
