@@ -1,6 +1,6 @@
-/* -----------------------------------------
-   TikTok 美區固定方案
------------------------------------------ */
+/* -----------------------------
+    TikTok 美區固定方案
+----------------------------- */
 const coinsData = [
     { amount: 30, usd: 0.42 },
     { amount: 350, usd: 4.95 },
@@ -12,9 +12,7 @@ const coinsData = [
 
 const grid = document.getElementById("coinsGrid");
 
-/* -----------------------------------------
-   Render 固定 Coin 卡片
------------------------------------------ */
+/* Render cards */
 coinsData.forEach(item => {
     const div = document.createElement("div");
     div.className = "card";
@@ -25,13 +23,17 @@ coinsData.forEach(item => {
     `;
 
     div.addEventListener("click", () => {
-        // Custom → 開啟小窗
+
+        // Custom → 開小窗
         if (item.amount === "Custom") {
-            openCustomModal();
+            customModal.classList.add("active");
+            customInputBox.innerText = "0";
+            customModalCoins.innerText = `0 Coins`;
+            customModalUSD.innerText = `US$0.00`;
             return;
         }
 
-        // 固定方案
+        // 固定方案選取
         document.querySelectorAll(".card").forEach(c => c.classList.remove("selected"));
         div.classList.add("selected");
         selectItem(item);
@@ -42,9 +44,7 @@ coinsData.forEach(item => {
 
 let selected = null;
 
-/* -----------------------------------------
-   選擇固定方案
------------------------------------------ */
+/* 選取固定方案 */
 function selectItem(item) {
     selected = item;
 
@@ -57,69 +57,57 @@ function selectItem(item) {
     document.getElementById("payBtn").disabled = false;
 }
 
-/* -----------------------------------------
-   Custom Modal 元件
------------------------------------------ */
+
+/* -----------------------------
+        Custom Modal
+----------------------------- */
 const customModal = document.getElementById("customModal");
 const customInputBox = document.getElementById("customInputBox");
-const customSummaryCoins = document.getElementById("customCoinsCount");
-const customSummaryUSD = document.getElementById("customCoinsUSD");
+const customModalCoins = document.getElementById("customModalCoins");
+const customModalUSD = document.getElementById("customModalUSD");
 const customCancel = document.getElementById("customCancel");
 const customApply = document.getElementById("customApply");
+const customRechargeBtn = document.getElementById("customRechargeBtn");
 
-/* 打開 Custom Modal */
-function openCustomModal() {
-    customModal.classList.add("active");
-    customInputBox.innerText = "0";
-    updateCustomSummary(0);
+/* 更新 Custom 小窗的匯率顯示 */
+function updateCustomModal(val) {
+    const coins = Number(val) || 0;
+    const usd = (coins * 0.013).toFixed(2);
+
+    customModalCoins.innerText = `${coins} Coins`;
+    customModalUSD.innerText = `US$${usd}`;
 }
 
-/* -----------------------------------------
-   Custom 小窗數字鍵盤
------------------------------------------ */
+/* 數字鍵 */
 document.querySelectorAll(".num").forEach(btn => {
     btn.addEventListener("click", () => {
         let current = customInputBox.innerText;
         if (current === "0") current = "";
 
-        customInputBox.innerText = current + btn.innerText;
+        let newVal = current + btn.innerText;
+        customInputBox.innerText = newVal;
 
-        const val = Number(customInputBox.innerText);
-        updateCustomSummary(val);
+        updateCustomModal(newVal);
     });
 });
 
-/* 刪除按鈕 */
+/* 刪除鍵 */
 document.querySelector(".del").addEventListener("click", () => {
     let val = customInputBox.innerText;
+    let newVal = val.length > 1 ? val.slice(0, -1) : "0";
 
-    val = val.length > 1 ? val.slice(0, -1) : "0";
-    customInputBox.innerText = val;
-
-    updateCustomSummary(Number(val));
+    customInputBox.innerText = newVal;
+    updateCustomModal(newVal);
 });
 
-/* -----------------------------------------
-   更新 Custom 小窗匯率
------------------------------------------ */
-function updateCustomSummary(val) {
-    if (!val || val <= 0) {
-        customSummaryCoins.innerText = "0 Coins";
-        customSummaryUSD.innerText = "US$0.00";
-        return;
-    }
+/* Cancel 關閉 */
+customCancel.addEventListener("click", () => {
+    customModal.classList.remove("active");
+});
 
-    const usd = (val * 0.013).toFixed(2);
-
-    customSummaryCoins.innerText = `${val} Coins`;
-    customSummaryUSD.innerText = `US$${usd}`;
-}
-
-/* -----------------------------------------
-   Custom Apply
------------------------------------------ */
-customApply.addEventListener("click", () => {
-    const val = Number(customInputBox.innerText);
+/* Apply → 套用到主頁面 */
+function applyCustomValue() {
+    let val = Number(customInputBox.innerText);
     if (!val || val <= 0) return;
 
     const usd = (val * 0.013).toFixed(2);
@@ -131,16 +119,21 @@ customApply.addEventListener("click", () => {
     document.getElementById("payBtn").disabled = false;
 
     customModal.classList.remove("active");
-});
 
-/* Cancel */
-customCancel.addEventListener("click", () => {
-    customModal.classList.remove("active");
-});
+    // 清除固定方案的選取外框
+    document.querySelectorAll(".card").forEach(c => c.classList.remove("selected"));
+}
 
-/* -----------------------------------------
-   Payment Modal
------------------------------------------ */
+/* Apply 按鈕 */
+customApply.addEventListener("click", applyCustomValue);
+
+/* Custom 小窗的 Recharge 按鈕 */
+customRechargeBtn.addEventListener("click", applyCustomValue);
+
+
+/* -----------------------------
+    Payment Modal
+----------------------------- */
 const payBtn = document.getElementById("payBtn");
 const paymentModal = document.getElementById("paymentModal");
 const cancelPay = document.getElementById("cancelPay");
@@ -154,9 +147,10 @@ cancelPay.addEventListener("click", () => {
     paymentModal.classList.remove("active");
 });
 
-/* -----------------------------------------
-   成功畫面 + Loading
------------------------------------------ */
+
+/* -----------------------------
+    Success + Loading
+----------------------------- */
 const successModal = document.getElementById("successModal");
 const coinsResult = document.getElementById("coins");
 const goBack = document.getElementById("goBack");
@@ -164,11 +158,11 @@ const loading = document.getElementById("loading");
 
 confirmPay.addEventListener("click", () => {
     paymentModal.classList.remove("active");
-
     loading.classList.remove("hidden");
 
     setTimeout(() => {
         loading.classList.add("hidden");
+
         coinsResult.innerText = `Recharged ${selected.amount} Coins`;
         successModal.classList.add("active");
     }, 3500);
@@ -178,9 +172,10 @@ goBack.addEventListener("click", () => {
     location.reload();
 });
 
-/* -----------------------------------------
-   Payment method active style
------------------------------------------ */
+
+/* -----------------------------
+       Payment Method Active
+----------------------------- */
 const methods = document.querySelectorAll(".method");
 
 methods.forEach(m => {
@@ -188,7 +183,4 @@ methods.forEach(m => {
         methods.forEach(x => x.classList.remove("active"));
         m.classList.add("active");
     });
-});
-document.getElementById("customRechargeBtn").addEventListener("click", () => {
-    document.getElementById("payBtn").click();
 });
