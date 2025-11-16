@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta-name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>TikTok Coins Mock</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
 
     <!-- Header -->
     <div class="topbar">
-        <img src="images/logo.png" class="logo">
+        <img src="images/logo.png" class="logo" alt="logo">
         <div class="brand-text">
             <div class="title">TikTok</div>
             <div class="subtitle">Purchase Coins</div>
@@ -34,7 +34,7 @@
 
     <!-- TikTok Extra Banner -->
     <div class="extra-img-box">
-        <img src="images/extra_banner.jpg" class="extra-img">
+        <img src="images/extra_banner.jpg" class="extra-img" alt="banner">
     </div>
 
     <!-- Selected Summary -->
@@ -46,20 +46,20 @@
         <button id="payBtn" class="recharge-btn" disabled>Recharge</button>
     </div>
 
-    <!-- Payment Modal -->
+    <!-- Payment Modal (centered, larger) -->
     <div id="paymentModal" class="modal">
-        <div class="modal-box">
+        <div class="modal-box payment-centered">
             <h2>Choose payment method</h2>
 
             <div class="method-row">
-                <div class="method"><img class="payicon" src="images/pay_applepay.svg"> Apple Pay</div>
-                <div class="method"><img class="payicon visa-icon" src="images/visa_logo.png"> Visa ******61941</div>
-                <div class="method"><img class="payicon" src="images/pay_paypal.svg"> PayPal</div>
-                <div class="method"><img class="payicon" src="images/pay_mastercard.svg"> Mastercard</div>
+                <div class="method"><img class="payicon" src="images/pay_applepay.svg" alt="apple"> Apple Pay</div>
+                <div class="method"><img class="payicon visa-icon" src="images/visa_logo.png" alt="visa"> Visa ******61941</div>
+                <div class="method"><img class="payicon" src="images/pay_paypal.svg" alt="paypal"> PayPal</div>
+                <div class="method"><img class="payicon" src="images/pay_mastercard.svg" alt="mc"> Mastercard</div>
             </div>
 
             <div class="modal-actions">
-                <button id="cancelPay" class="modal-btn-red">Cancel</button>
+                <button id="cancelPay" class="modal-btn-gray">Cancel</button>
                 <button id="confirmPay" class="modal-btn-red">Recharge</button>
             </div>
         </div>
@@ -67,27 +67,27 @@
 
     <!-- Success Modal -->
     <div id="successModal" class="modal">
-        <div class="modal-box">
-            <img id="checkmark" src="images/check_success.svg">
+        <div class="modal-box success-box">
+            <img id="checkmark" src="images/check_success.svg" alt="ok">
             <div id="successText">Payment completed</div>
             <div id="coins">Recharged 0 Coins</div>
-            <button id="goBack" class="btn">Go Back</button>
+            <button id="goBack" class="recharge-btn">Go Back</button>
         </div>
     </div>
 
-    <!-- Custom Coins Popup -->
-    <div id="customModal" class="modal">
-        <div class="custom-modal-box">
+    <!-- Custom Coins Popup (bottom large modal) -->
+    <div id="customModal" class="modal bottom">
+        <div class="modal-box custom-box">
+            <button id="customBack" class="back-btn">&lt;</button>
+            <h2>Select Coin Amount</h2>
+            <div id="customRange" class="small-note">30 - 2,500,000</div>
 
-            <!-- Back button -->
-            <div id="customBackBtn" class="custom-back">&lt;</div>
-
-            <h2 style="margin-top:10px;">Select Coin Amount</h2>
-
-            <div id="customInputBox" class="custom-input-box">0</div>
-
-            <div id="customModalCoins" class="custom-summary-text">0 Coins</div>
-            <div id="customModalUSD" class="custom-summary-text">US$0.00</div>
+            <!-- Input + Summary -->
+            <div class="custom-input-area">
+                <div id="customInputBox" class="custom-input">0</div>
+                <div id="customModalCoins" class="custom-summary-line">0 Coins</div>
+                <div id="customModalUSD" class="custom-summary-line">US$0.00</div>
+            </div>
 
             <!-- Number Pad -->
             <div class="number-grid">
@@ -107,10 +107,8 @@
                 <button class="num">0</button>
             </div>
 
-            <!-- Recharge -->
-            <button id="customRechargeBtn" class="recharge-btn" style="width:100%; margin-top:20px;">
-                Recharge
-            </button>
+            <!-- Bottom Recharge (same as main) -->
+            <button id="customRechargeBtn" class="recharge-btn">Recharge</button>
         </div>
     </div>
 
@@ -120,6 +118,6 @@
         <div class="loading-text">Processing...</div>
     </div>
 
-    <script src="script.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
