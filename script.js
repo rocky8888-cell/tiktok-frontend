@@ -125,5 +125,59 @@ methods.forEach(m => {
         m.classList.add("active");
     });
 });
+/* ----------------------------- */
+/*   Custom Popup Logic          */
+/* ----------------------------- */
+
+const customModal = document.getElementById("customModal");
+const customInputBox = document.getElementById("customInputBox");
+const customCancel = document.getElementById("customCancel");
+const customApply = document.getElementById("customApply");
+
+/* 打開 Custom Modal */
+document.querySelectorAll(".card").forEach(card => {
+    card.addEventListener("click", () => {
+        if (card.querySelector(".amount").innerText === "Custom") {
+            customModal.classList.add("active");
+            customInputBox.innerText = "0";
+        }
+    });
+});
+
+/* 點數字按鈕 */
+document.querySelectorAll(".num").forEach(btn => {
+    btn.addEventListener("click", () => {
+        let current = customInputBox.innerText;
+        if (current === "0") current = "";
+        customInputBox.innerText = current + btn.innerText;
+    });
+});
+
+/* 刪除按鈕 */
+document.querySelector(".del").addEventListener("click", () => {
+    let val = customInputBox.innerText;
+    customInputBox.innerText = val.length > 1 ? val.slice(0, -1) : "0";
+});
+
+/* Cancel */
+customCancel.addEventListener("click", () => {
+    customModal.classList.remove("active");
+});
+
+/* Apply */
+customApply.addEventListener("click", () => {
+    let val = Number(customInputBox.innerText);
+    if (!val || val <= 0) return;
+
+    const usd = (val * 0.013).toFixed(2);
+
+    selected = { amount: val, usd: usd };
+
+    document.getElementById("selectedText").innerText = `Selected: ${val} Coins`;
+    document.getElementById("selectedUSD").innerText = `US$${usd}`;
+    document.getElementById("payBtn").disabled = false;
+
+    customModal.classList.remove("active");
+});
 
 
