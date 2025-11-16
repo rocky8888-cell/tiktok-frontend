@@ -144,14 +144,7 @@ const customCancel = document.getElementById("customCancel");
 const customApply = document.getElementById("customApply");
 
 /* 打開 Custom Modal */
-document.querySelectorAll(".card").forEach(card => {
-    card.addEventListener("click", () => {
-        if (card.querySelector(".amount").innerText === "Custom") {
-            customModal.classList.add("active");
-            customInputBox.innerText = "0";
-        }
-    });
-});
+
 
 /* 點數字按鈕 */
 document.querySelectorAll(".num").forEach(btn => {
@@ -188,6 +181,7 @@ customApply.addEventListener("click", () => {
 
     customModal.classList.remove("active");
 });
+
 
 
 
