@@ -1,4 +1,6 @@
-/* TikTok 美區固定方案 */
+/* -----------------------------------------
+   TikTok 美區固定方案
+----------------------------------------- */
 const coinsData = [
     { amount: 30, usd: 0.42 },
     { amount: 350, usd: 4.95 },
@@ -10,7 +12,9 @@ const coinsData = [
 
 const grid = document.getElementById("coinsGrid");
 
-/* Render Cards */
+/* -----------------------------------------
+   Render 固定 Coin 卡片
+----------------------------------------- */
 coinsData.forEach(item => {
     const div = document.createElement("div");
     div.className = "card";
@@ -19,13 +23,11 @@ coinsData.forEach(item => {
         <div class="amount">${item.amount}</div>
         <div class="usd">US$${item.usd}</div>
     `;
-    div.addEventListener("click", () => {
 
-        // Custom → 彈出彈窗
+    div.addEventListener("click", () => {
+        // Custom → 開啟小窗
         if (item.amount === "Custom") {
-            customModal.classList.add("active");
-            customInputBox.innerText = "0";
-            updateCustomPreview(0); // ← 修正：開啟時更新匯率區域
+            openCustomModal();
             return;
         }
 
@@ -40,7 +42,9 @@ coinsData.forEach(item => {
 
 let selected = null;
 
-/* Select fixed coin packages */
+/* -----------------------------------------
+   選擇固定方案
+----------------------------------------- */
 function selectItem(item) {
     selected = item;
 
@@ -53,19 +57,55 @@ function selectItem(item) {
     document.getElementById("payBtn").disabled = false;
 }
 
-/* Custom coins 輸入框（你保留用不到，但我不改動） */
-const customInput = document.getElementById("customCoins");
+/* -----------------------------------------
+   Custom Modal 元件
+----------------------------------------- */
+const customModal = document.getElementById("customModal");
+const customInputBox = document.getElementById("customInputBox");
 const customSummaryCoins = document.getElementById("customCoinsCount");
 const customSummaryUSD = document.getElementById("customCoinsUSD");
+const customCancel = document.getElementById("customCancel");
+const customApply = document.getElementById("customApply");
 
-customInput.addEventListener("input", () => {
-    const val = Number(customInput.value);
+/* 打開 Custom Modal */
+function openCustomModal() {
+    customModal.classList.add("active");
+    customInputBox.innerText = "0";
+    updateCustomSummary(0);
+}
 
+/* -----------------------------------------
+   Custom 小窗數字鍵盤
+----------------------------------------- */
+document.querySelectorAll(".num").forEach(btn => {
+    btn.addEventListener("click", () => {
+        let current = customInputBox.innerText;
+        if (current === "0") current = "";
+
+        customInputBox.innerText = current + btn.innerText;
+
+        const val = Number(customInputBox.innerText);
+        updateCustomSummary(val);
+    });
+});
+
+/* 刪除按鈕 */
+document.querySelector(".del").addEventListener("click", () => {
+    let val = customInputBox.innerText;
+
+    val = val.length > 1 ? val.slice(0, -1) : "0";
+    customInputBox.innerText = val;
+
+    updateCustomSummary(Number(val));
+});
+
+/* -----------------------------------------
+   更新 Custom 小窗匯率
+----------------------------------------- */
+function updateCustomSummary(val) {
     if (!val || val <= 0) {
-        selected = null;
         customSummaryCoins.innerText = "0 Coins";
         customSummaryUSD.innerText = "US$0.00";
-        document.getElementById("payBtn").disabled = true;
         return;
     }
 
@@ -73,15 +113,34 @@ customInput.addEventListener("input", () => {
 
     customSummaryCoins.innerText = `${val} Coins`;
     customSummaryUSD.innerText = `US$${usd}`;
+}
+
+/* -----------------------------------------
+   Custom Apply
+----------------------------------------- */
+customApply.addEventListener("click", () => {
+    const val = Number(customInputBox.innerText);
+    if (!val || val <= 0) return;
+
+    const usd = (val * 0.013).toFixed(2);
 
     selected = { amount: val, usd: usd };
 
     document.getElementById("selectedText").innerText = `Selected: ${val} Coins`;
     document.getElementById("selectedUSD").innerText = `US$${usd}`;
     document.getElementById("payBtn").disabled = false;
+
+    customModal.classList.remove("active");
 });
 
-/* Payment Modal */
+/* Cancel */
+customCancel.addEventListener("click", () => {
+    customModal.classList.remove("active");
+});
+
+/* -----------------------------------------
+   Payment Modal
+----------------------------------------- */
 const payBtn = document.getElementById("payBtn");
 const paymentModal = document.getElementById("paymentModal");
 const cancelPay = document.getElementById("cancelPay");
@@ -95,11 +154,12 @@ cancelPay.addEventListener("click", () => {
     paymentModal.classList.remove("active");
 });
 
-/* Success Modal + Loading */
+/* -----------------------------------------
+   成功畫面 + Loading
+----------------------------------------- */
 const successModal = document.getElementById("successModal");
 const coinsResult = document.getElementById("coins");
 const goBack = document.getElementById("goBack");
-
 const loading = document.getElementById("loading");
 
 confirmPay.addEventListener("click", () => {
@@ -109,10 +169,8 @@ confirmPay.addEventListener("click", () => {
 
     setTimeout(() => {
         loading.classList.add("hidden");
-
         coinsResult.innerText = `Recharged ${selected.amount} Coins`;
         successModal.classList.add("active");
-
     }, 3500);
 });
 
@@ -120,81 +178,14 @@ goBack.addEventListener("click", () => {
     location.reload();
 });
 
-/* ----------------------------- */
-/*     Payment Method Active     */
-/* ----------------------------- */
-
+/* -----------------------------------------
+   Payment method active style
+----------------------------------------- */
 const methods = document.querySelectorAll(".method");
+
 methods.forEach(m => {
     m.addEventListener("click", () => {
         methods.forEach(x => x.classList.remove("active"));
         m.classList.add("active");
     });
-});
-
-/* ----------------------------- */
-/*   Custom Popup Logic          */
-/* ----------------------------- */
-
-const customModal = document.getElementById("customModal");
-const customInputBox = document.getElementById("customInputBox");
-const customCancel = document.getElementById("customCancel");
-const customApply = document.getElementById("customApply");
-
-// 匯率顯示（彈窗裡）
-// 你 HTML 一定要有：
-// <div id="popupSummaryCoins"></div>
-// <div id="popupSummaryUSD"></div>
-const popupSummaryCoins = document.getElementById("popupSummaryCoins");
-const popupSummaryUSD = document.getElementById("popupSummaryUSD");
-
-// 更新匯率（彈窗）
-function updateCustomPreview(val) {
-    const coins = Number(val) || 0;
-    const usd = (coins * 0.013).toFixed(2);
-
-    popupSummaryCoins.innerText = `${coins} Coins`;
-    popupSummaryUSD.innerText = `US$${usd}`;
-}
-
-/* 點數字按鈕 */
-document.querySelectorAll(".num").forEach(btn => {
-    btn.addEventListener("click", () => {
-        let current = customInputBox.innerText;
-        if (current === "0") current = "";
-        const newVal = current + btn.innerText;
-        customInputBox.innerText = newVal;
-
-        updateCustomPreview(newVal);  // ← ⭐ 每次按鍵都更新
-    });
-});
-
-/* 刪除按鈕 */
-document.querySelector(".del").addEventListener("click", () => {
-    let val = customInputBox.innerText;
-    let newVal = val.length > 1 ? val.slice(0, -1) : "0";
-    customInputBox.innerText = newVal;
-
-    updateCustomPreview(newVal); // ← ⭐ 刪除也更新
-});
-
-/* Cancel */
-customCancel.addEventListener("click", () => {
-    customModal.classList.remove("active");
-});
-
-/* Apply */
-customApply.addEventListener("click", () => {
-    let val = Number(customInputBox.innerText);
-    if (!val || val <= 0) return;
-
-    const usd = (val * 0.013).toFixed(2);
-
-    selected = { amount: val, usd: usd };
-
-    document.getElementById("selectedText").innerText = `Selected: ${val} Coins`;
-    document.getElementById("selectedUSD").innerText = `US$${usd}`;
-    document.getElementById("payBtn").disabled = false;
-
-    customModal.classList.remove("active");
 });
