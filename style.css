@@ -49,6 +49,7 @@ body {
     padding: 12px;
     border-radius: 12px;
     border: 1px solid #ddd;
+    font-size: 16px;
 }
 
 #searchBtn {
@@ -56,6 +57,11 @@ body {
     border-radius: 12px;
     background: #f1f1f1;
     border: 1px solid #ddd;
+}
+#searchBtn:active {
+    opacity: 0.7;
+    transform: scale(0.97);
+    transition: 0.1s;
 }
 
 /* TITLE */
@@ -65,20 +71,22 @@ body {
     padding: 20px 14px 16px;
 }
 
-/* GRID */
+/* GRID — 3 columns */
 .grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr) !important;
+    grid-template-columns: repeat(3, 1fr);
     gap: 14px;
     padding: 0 14px;
 }
 
+/* COIN CARD */
 .card {
     padding: 18px 10px;
     background: #fafafa;
     border-radius: 16px;
     text-align: center;
     border: 1px solid #eee;
+    transition: 0.2s;
 }
 
 .card .icon {
@@ -95,28 +103,27 @@ body {
     color: #666;
 }
 
-/* CUSTOM INPUT */
-.custom-row {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 0 14px;
-    margin-top: 20px;
+/* CARD SELECT EFFECT (保持你原本效果) */
+.card.selected {
+    border: 2px solid #ff0050 !important;
+    background: #ffe6ef !important;
+    transform: scale(1.02);
 }
 
-#customCoins {
-    flex: 1;
-    padding: 12px;
-    border-radius: 12px;
-    border: 1px solid #ddd;
+/* CUSTOM MODAL BANNER */
+.extra-img-box {
+    width: 100%;
+    padding: 0 15px;
+    margin-top: 10px;
 }
 
-.custom-summary {
-    text-align: right;
-    font-size: 14px;
+.extra-img {
+    width: 100%;
+    border-radius: 14px;
+    display: block;
 }
 
-/* SELECTED INFO */
+/* SELECT SUMMARY */
 .summary-row {
     padding: 0 14px;
     margin-top: 20px;
@@ -140,21 +147,22 @@ body {
     border-radius: 14px;
     border: none;
 }
-
 .recharge-btn:disabled {
     background: #ff8cb3;
 }
 
-/* MODAL */
+/* MODAL BASE */
 .modal {
     position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     background: rgba(0,0,0,0.35);
     display: none;
     justify-content: center;
-    align-items: center;
-    padding: 14px;
+    align-items: flex-end;   /* ← 小窗在下方 */
+    padding: 0;
     z-index: 999;
 }
 
@@ -164,12 +172,13 @@ body {
 
 .modal-box {
     background: white;
-    padding: 22px;
-    border-radius: 18px;
     width: 100%;
-    max-width: 420px;
+    max-width: 480px;
+    padding: 22px;
+    border-radius: 18px 18px 0 0; /* ← 上圓角 */
 }
 
+/* PAYMENT METHOD */
 .method-row {
     display: flex;
     flex-direction: column;
@@ -185,24 +194,40 @@ body {
     border-radius: 14px;
 }
 
+.method.active {
+    border: 2px solid #ff0050;
+    background: #ffe6ef;
+    transition: 0.2s;
+}
+
 .payicon {
     width: 26px;
     height: 26px;
+}
+
+.payicon.visa-icon {
+    width: 38px;
+    height: auto;
 }
 
 /* SUCCESS MODAL */
 #successModal .modal-box {
     text-align: center;
 }
-
 #checkmark {
     width: 80px;
     margin-bottom: 16px;
 }
+#goBack {
+    background: #ff0050 !important;
+    color: #fff !important;
+    border-radius: 14px;
+    padding: 12px 26px;
+    margin-top: 12px;
+}
 
-/* LOADING ANIMATION */
+/* LOADING */
 .loading.hidden { display: none; }
-
 .loading {
     position: fixed;
     top: 0; left: 0;
@@ -214,7 +239,6 @@ body {
     align-items: center;
     z-index: 2000;
 }
-
 .spinner {
     width: 40px;
     height: 40px;
@@ -223,59 +247,24 @@ body {
     border-radius: 50%;
     animation: spin 0.7s linear infinite;
 }
+@keyframes spin { to { transform: rotate(360deg); } }
 
-@keyframes spin {
-    to { transform: rotate(360deg); }
+/* CUSTOM POPUP */
+#customModal .modal-box {
+    height: 55vh;               /* ← 變大，占螢幕下半部 */
+    overflow: hidden;
+    text-align: center;
 }
 
-.loading-text {
-    margin-top: 12px;
-    font-size: 16px;
-}
-
-.modal-btn-red {
-    background: #ff0050;
-    color: #ffffff;
-    border: none;
-    padding: 12px 22px;
+#customInputBox {
+    padding: 12px;
+    border: 1px solid #ddd;
     border-radius: 12px;
-    font-size: 16px;
+    margin-bottom: 10px;
+    font-size: 24px;
 }
 
-.method.active {
-    border: 2px solid #ff0050;
-    background: #ffe6ef;
-    transition: 0.2s;
-}
-
-#goBack {
-    background: #ff0050 !important;
-    color: #ffffff !important;
-    border-radius: 14px;
-    padding: 12px 26px;
-    font-size: 17px;
-    border: none;
-    margin-top: 12px;
-}
-
-.payicon.visa-icon {
-    width: 38px;
-    height: auto;
-}
-
-.extra-img-box {
-    width: 100%;
-    padding: 0 15px;
-    margin-top: 10px;
-}
-
-.extra-img {
-    width: 100%;
-    border-radius: 14px;
-    display: block;
-}
-
-/* --- NUMBER PAD --- */
+/* Number pad */
 .number-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -290,109 +279,16 @@ body {
     border: 1px solid #ddd;
     background: #f7f7f7;
 }
-
 .number-grid button:active {
     background: #e5e5e5;
 }
 
-/* -------------------------------------------------- */
-/* 🔥🔥 你要求的更改：Custom 小窗變成「底部彈出大窗口」🔥🔥 */
-/* -------------------------------------------------- */
-
-#customModal .modal-box {
-    width: 100%;
-    max-width: 100%;
-    height: 55vh;                 /* 佔手機螢幕下半部 */
-    border-radius: 20px 20px 0 0; /* 上圓角、下平 */
-    position: absolute;
-    bottom: 0;                   /* 黏在底部 */
-    left: 0;
-    right: 0;
-    transform: translateY(0);
-    padding: 24px;
-}
-/* ----------------------------- */
-/*    NEW: Custom Modal Bottom Sheet  */
-/* ----------------------------- */
-
-#customModal.active {
-    display: flex;
-}
-
-#customModal {
-    position: fixed;
-    left: 0;
-    right: 0;
-    bottom: 0;
-
-    height: 55vh;               /* 🔥 變成手機螢幕下半部 */
-    max-height: 480px;
-    background: #fff;
-
-    border-radius: 22px 22px 0 0;  /* 🔥 上圓角 */
-    padding: 22px 18px 28px 18px;
-
-    display: none;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-
-    box-shadow: 0 -4px 18px rgba(0,0,0,0.15);
-    animation: slideUp 0.25s ease-out;
-}
-
-@keyframes slideUp {
-    from {
-        transform: translateY(100%);
-    }
-    to {
-        transform: translateY(0);
-    }
-}
-
-/* 數字輸入框美化，放大、置中 */
-#customInputBox {
-    width: 90%;
-    font-size: 32px;
-    text-align: center;
-
-    padding: 14px;
-    border-radius: 12px;
-    border: 1px solid #ddd;
-    margin-top: 10px;
-}
-
-/* 匯率顯示 */
-#customCalcBox {
-    text-align: center;
-    margin-top: 10px;
-    font-size: 17px;
-    color: #555;
-}
-
-/* 數字鍵盤：放大、等寬 */
-.number-grid {
-    width: 100%;
-    margin-top: 18px;
-
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 12px;
-}
-
-.number-grid button {
-    font-size: 20px;
-    padding: 16px 0;
-
-    background: #f5f5f5;
-    border-radius: 12px;
+/* Buttons in custom modal */
+.modal-btn-red {
+    background: #ff0050;
+    color: #ffffff;
     border: none;
-}
-
-/* apply & cancel */
-#customApply, #customCancel {
-    font-size: 18px;
-    padding: 14px 0;
+    padding: 12px 22px;
     border-radius: 12px;
-    width: 47%;
+    font-size: 16px;
 }
