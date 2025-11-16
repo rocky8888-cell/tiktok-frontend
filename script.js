@@ -189,3 +189,6 @@ methods.forEach(m => {
         m.classList.add("active");
     });
 });
+document.getElementById("customRechargeBtn").addEventListener("click", () => {
+    document.getElementById("payBtn").click();
+});
