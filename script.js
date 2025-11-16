@@ -125,6 +125,53 @@ methods.forEach(m => {
         m.classList.add("active");
     });
 });
+/* ----------------------------- */
+/*     Custom Popup Logic        */
+/* ----------------------------- */
+
+const customModal = document.getElementById("customModal");
+const popupInput = document.getElementById("popupCustomInput");
+const popupCancel = document.getElementById("popupCancel");
+const popupApply = document.getElementById("popupApply");
+
+/* 找到 Custom 這張卡 */
+const customCard = [...document.querySelectorAll(".card")]
+    .find(c => c.innerText.includes("Custom"));
+
+/* 點擊 Custom 顯示視窗 */
+customCard.addEventListener("click", () => {
+    customModal.classList.add("active");
+    popupInput.value = "";
+});
+
+/* 關閉視窗 */
+popupCancel.addEventListener("click", () => {
+    customModal.classList.remove("active");
+});
+
+/* 按下 Apply 套用金額 */
+popupApply.addEventListener("click", () => {
+    let val = Number(popupInput.value);
+
+    if (!val || val <= 0) return;
+
+    // 用你原本的匯率： 1 coin = 0.013 USD
+    let usd = (val * 0.013).toFixed(2);
+
+    selected = { amount: val, usd: usd };
+
+    document.getElementById("selectedText").innerText =
+        `Selected: ${val} Coins`;
+
+    document.getElementById("selectedUSD").innerText =
+        `US$${usd}`;
+
+    document.getElementById("customCoinsCount").innerText = `${val} Coins`;
+    document.getElementById("customCoinsUSD").innerText = `US$${usd}`;
+
+    document.getElementById("payBtn").disabled = false;
+    customModal.classList.remove("active");
+});
 
 
 
