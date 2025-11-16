@@ -23,18 +23,10 @@ body {
     width: 38px;
     height: 38px;
     border-radius: 8px;
-    object-fit: contain;
 }
 
-.title {
-    font-size: 22px;
-    font-weight: 700;
-}
-
-.subtitle {
-    font-size: 14px;
-    color: #666;
-}
+.title { font-size: 22px; font-weight: 700; }
+.subtitle { font-size: 14px; color: #666; }
 
 /* SEARCH */
 .search-row {
@@ -43,20 +35,19 @@ body {
     padding: 0 14px;
     margin-top: 10px;
 }
-
-#tiktokId {
+#tiktokId, #customCoins {
     flex: 1;
     padding: 12px;
     border-radius: 12px;
     border: 1px solid #ddd;
 }
-
 #searchBtn {
     padding: 0 18px;
     border-radius: 12px;
     background: #f1f1f1;
     border: 1px solid #ddd;
 }
+#searchBtn:active { opacity: .7; transform: scale(.97); }
 
 /* TITLE */
 .container h1 {
@@ -68,11 +59,10 @@ body {
 /* GRID */
 .grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 14px;
     padding: 0 14px;
 }
-
 .card {
     padding: 18px 10px;
     background: #fafafa;
@@ -80,48 +70,30 @@ body {
     text-align: center;
     border: 1px solid #eee;
 }
+.card .icon { width: 48px; height: 48px; }
+.amount { font-size: 20px; font-weight: bold; }
+.usd { color: #666; }
 
-.card .icon {
-    width: 48px;
-    height: 48px;
+.card.selected {
+    border: 2px solid #ff0050 !important;
+    background: #ffe6ef !important;
+    transform: scale(1.02);
 }
 
-.amount {
-    font-size: 20px;
-    font-weight: bold;
+/* BANNER */
+.extra-img-box {
+    width: 100%;
+    padding: 0 15px;
+    margin-top: 10px;
+}
+.extra-img {
+    width: 100%;
+    border-radius: 14px;
+    display: block;
 }
 
-.usd {
-    color: #666;
-}
-
-/* CUSTOM INPUT */
-.custom-row {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 0 14px;
-    margin-top: 20px;
-}
-
-#customCoins {
-    flex: 1;
-    padding: 12px;
-    border-radius: 12px;
-    border: 1px solid #ddd;
-}
-
-.custom-summary {
-    text-align: right;
-    font-size: 14px;
-}
-
-/* SELECTED INFO */
-.summary-row {
-    padding: 0 14px;
-    margin-top: 20px;
-}
-
+/* SUMMARY */
+.summary-row { padding: 0 14px; margin-top: 20px; }
 .selected-info {
     background: #fafafa;
     padding: 16px;
@@ -129,7 +101,7 @@ body {
     border: 1px solid #eee;
 }
 
-/* RECHARGE BUTTON */
+/* BUTTON */
 .recharge-btn {
     width: 100%;
     margin-top: 16px;
@@ -140,27 +112,17 @@ body {
     border-radius: 14px;
     border: none;
 }
+.recharge-btn:disabled { background: #ff8cb3; }
 
-.recharge-btn:disabled {
-    background: #ff8cb3;
-}
-
-/* MODAL */
+/* MODAL GENERAL */
 .modal {
-    position: fixed;
-    top: 0; left: 0;
+    position: fixed; top: 0; left: 0;
     width: 100%; height: 100%;
-    background: rgba(0,0,0,0.35);
-    display: none;
-    justify-content: center;
-    align-items: center;
+    background: rgba(0,0,0,.35);
+    display: none; justify-content: center; align-items: center;
     padding: 14px;
-    z-index: 999;
 }
-
-.modal.active {
-    display: flex;
-}
+.modal.active { display: flex; }
 
 .modal-box {
     background: white;
@@ -170,257 +132,84 @@ body {
     max-width: 420px;
 }
 
-.method-row {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-}
-
+/* PAYMENT */
+.method-row { display: flex; flex-direction: column; gap: 12px; }
 .method {
-    display: flex;
-    align-items: center;
-    gap: 10px;
+    display: flex; align-items: center; gap: 10px;
     padding: 12px;
     border: 1px solid #ddd;
     border-radius: 14px;
 }
+.method.active {
+    border: 2px solid #ff0050;
+    background: #ffe6ef;
+}
+.payicon { width: 26px; }
+.visa-icon { width: 38px; }
 
-.payicon {
-    width: 26px;
-    height: 26px;
+/* SUCCESS */
+#successModal .modal-box { text-align: center; }
+#checkmark { width: 80px; margin-bottom: 16px; }
+#goBack {
+    background: #ff0050 !important;
+    color: #fff !important;
+    padding: 12px 26px;
+    border-radius: 14px;
+    font-size: 17px;
+    margin-top: 12px;
 }
 
-/* SUCCESS MODAL */
-#successModal .modal-box {
+/* LOADING */
+.loading { position: fixed; top:0; left:0; width:100%; height:100%; display:flex;
+           align-items:center; justify-content:center; background:rgba(255,255,255,0.7); }
+.hidden { display:none; }
+.spinner {
+    width: 40px; height: 40px;
+    border: 4px solid #ddd; border-top-color:#ff0050;
+    border-radius: 50%;
+    animation: spin .7s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ------------------------- */
+/* CUSTOM MODAL (新)         */
+/* ------------------------- */
+.custom-box {
+    margin: 14px auto;
+    padding: 14px;
+    border: 1px solid #ddd;
+    font-size: 20px;
+    border-radius: 12px;
+    width: 100%;
     text-align: center;
 }
-
-#checkmark {
-    width: 80px;
-    margin-bottom: 16px;
+#popupCoins, #popupUSD {
+    margin-top: 4px;
+    font-size: 15px;
+    color: #444;
 }
 
-/* LOADING ANIMATION */
-.loading.hidden { display: none; }
-
-.loading {
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background: rgba(255,255,255,0.7);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    z-index: 2000;
+/* Keypad */
+.number-grid {
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    gap: 10px;
 }
-
-.spinner {
-    width: 40px;
-    height: 40px;
-    border: 4px solid #ddd;
-    border-top-color: #ff0050;
-    border-radius: 50%;
-    animation: spin 0.7s linear infinite;
+.number-grid button {
+    padding: 14px 0;
+    border-radius: 12px;
+    border: 1px solid #ddd;
+    font-size: 18px;
+    background: #f7f7f7;
 }
+.number-grid button:active { background: #e5e5e5; }
 
-@keyframes spin {
-    to { transform: rotate(360deg); }
-}
-
-.loading-text {
-    margin-top: 12px;
-    font-size: 16px;
-}
+/* Buttons */
 .modal-btn-red {
     background: #ff0050;
-    color: #ffffff;
+    color: #fff;
     border: none;
     padding: 12px 22px;
     border-radius: 12px;
     font-size: 16px;
-}
-.method.active {
-    border: 2px solid #ff0050;   /* TikTok 紅 */
-    background: #ffe6ef;         /* 淺粉背景讓效果更明顯 */
-    transition: 0.2s;
-}
-#goBack {
-    background: #ff0050 !important; /* TikTok 紅 */
-    color: #ffffff !important;      /* 白字 */
-    border-radius: 10px;
-    padding: 12px 0;
-    font-size: 16px;
-    border: none;
-}
-/* 選取時的高亮效果 */
-.card.selected {
-    border: 2px solid #ff0050 !important; /* 紅色外框 */
-    background: #ffe6ef !important;       /* 淡粉背景 */
-    transform: scale(1.02);               /* 微微放大 */
-    transition: 0.15s;
-}
-/* 改成 3 欄版面 */
-.grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr) !important;
-    gap: 14px;
-    padding: 0 14px;
-}
-/* Search 按鈕按下去的效果 */
-#searchBtn:active {
-    opacity: 0.7;
-    transform: scale(0.97);
-    transition: 0.1s;
-}
-#tiktokId {
-    font-size: 16px;   /* ← iPhone 不會放大 */
-}
-#customCoins {
-    font-size: 16px;   /* ← 不會放大 */
-}
-/* Make Go Back button slightly bigger */
-#goBack {
-    padding: 12px 26px;   /* 原本比較小，這裡稍微放大 */
-    font-size: 17px;      /* 文字放大一點 */
-    border-radius: 14px;  /* 保持圓滑 */
-}
-/* Make VISA icon slightly smaller */
-.payicon.visa-icon {
-    width: 38px;    /* 比剛剛的小一點點 */
-    height: auto;
-}
-.extra-img-box {
-    width: 100%;
-    padding: 0 15px;
-    margin-top: 10px;
-}
-
-.extra-img {
-    width: 100%;
-    border-radius: 14px;
-    display: block;
-}
-/* Move Go Back button slightly lower */
-#goBack {
-    margin-top: 12px;   /* 往下 12px，你想再多我也可以微調 */
-}
-#c
-/* Custom Number Pad Layout */
-.number-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 10px;
-    margin-top: 10px;
-}
-
-.number-grid button {
-    padding: 14px 0;
-    font-size: 18px;
-    border-radius: 12px;
-    border: 1px solid #ddd;
-    background: #f7f7f7;
-}
-.number-grid button:active {
-    background: #e5e5e5;
-}
-/* ===== TikTok Official Custom Amount Popup ===== */
-
-/* 整個彈窗 */
-#customModal .modal-box {
-    background: #ffffff;
-    border-radius: 28px;
-    padding: 26px 20px 30px 20px;
-    width: 88%;
-    max-width: 420px;
-    box-shadow: 0 8px 28px rgba(0,0,0,0.15);
-}
-
-/* 標題 */
-#customModal h2 {
-    font-size: 22px;
-    font-weight: 700;
-    text-align: center;
-    margin-bottom: 6px;
-}
-
-/* 范圍文字 */
-#customRange {
-    text-align: center;
-    font-size: 15px;
-    color: #777;
-    margin-bottom: 18px;
-}
-
-/* 顯示輸入框（像 TikTok 的） */
-#customInputBox {
-    width: 100%;
-    text-align: center;
-    font-size: 26px;
-    padding: 14px 0;
-    border: 1px solid #ddd;
-    border-radius: 14px;
-    background: #fafafa;
-    margin-bottom: 20px;
-}
-
-/* 數字鍵盤區塊 */
-.number-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 12px;
-    margin-bottom: 20px;
-}
-
-/* 每顆按鍵 */
-.number-grid button {
-    padding: 14px 0;
-    font-size: 20px;
-    border-radius: 14px;
-    border: none;
-    background: #f6f6f6;
-    color: #333;
-    font-weight: 500;
-    box-shadow: inset 0 0 0 1px #e4e4e4;
-}
-
-.number-grid button:active {
-    background: #e3e3e3;
-}
-
-/* 刪除鍵（灰色 ×） */
-.del {
-    font-size: 22px !important;
-    font-weight: bold;
-    color: #666;
-}
-
-/* 按鈕列 */
-#customModal .modal-actions,
-#customModal > div > div:last-child {
-    display: flex;
-    justify-content: space-between;
-    gap: 14px;
-}
-
-/* Cancel */
-#customCancel {
-    flex: 1;
-    background: #eaeaea !important;
-    color: #333 !important;
-    border-radius: 12px;
-    padding: 13px 0;
-    font-size: 17px;
-    border: none;
-}
-
-/* Apply（TikTok 粉紅色） */
-#customApply {
-    flex: 1;
-    background: #ff0050 !important;
-    color: white !important;
-    border-radius: 12px;
-    padding: 13px 0;
-    font-size: 17px;
-    border: none;
 }
