@@ -305,3 +305,25 @@ body {
 .number-grid button:active {
     background: #e2e2e2;
 }
+/* ====== Center & Enlarge Payment Modal ====== */
+
+#paymentModal .modal-box {
+    position: relative;
+    top: auto;
+    left: auto;
+
+    width: 92%;              /* 比原本更大 */
+    max-width: 480px;        /* 電腦也會變大 */
+    padding: 26px 22px;
+    border-radius: 18px;
+
+    transform: translate(0, 0);   /* 清除原本的位置偏移設定 */
+}
+
+/* 讓整個 modal 內容絕對置中 */
+#paymentModal.modal {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    padding: 0 !important;
+}
