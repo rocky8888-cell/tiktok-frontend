@@ -324,3 +324,103 @@ body {
 .number-grid button:active {
     background: #e5e5e5;
 }
+/* ===== TikTok Official Custom Amount Popup ===== */
+
+/* 整個彈窗 */
+#customModal .modal-box {
+    background: #ffffff;
+    border-radius: 28px;
+    padding: 26px 20px 30px 20px;
+    width: 88%;
+    max-width: 420px;
+    box-shadow: 0 8px 28px rgba(0,0,0,0.15);
+}
+
+/* 標題 */
+#customModal h2 {
+    font-size: 22px;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 6px;
+}
+
+/* 范圍文字 */
+#customRange {
+    text-align: center;
+    font-size: 15px;
+    color: #777;
+    margin-bottom: 18px;
+}
+
+/* 顯示輸入框（像 TikTok 的） */
+#customInputBox {
+    width: 100%;
+    text-align: center;
+    font-size: 26px;
+    padding: 14px 0;
+    border: 1px solid #ddd;
+    border-radius: 14px;
+    background: #fafafa;
+    margin-bottom: 20px;
+}
+
+/* 數字鍵盤區塊 */
+.number-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+/* 每顆按鍵 */
+.number-grid button {
+    padding: 14px 0;
+    font-size: 20px;
+    border-radius: 14px;
+    border: none;
+    background: #f6f6f6;
+    color: #333;
+    font-weight: 500;
+    box-shadow: inset 0 0 0 1px #e4e4e4;
+}
+
+.number-grid button:active {
+    background: #e3e3e3;
+}
+
+/* 刪除鍵（灰色 ×） */
+.del {
+    font-size: 22px !important;
+    font-weight: bold;
+    color: #666;
+}
+
+/* 按鈕列 */
+#customModal .modal-actions,
+#customModal > div > div:last-child {
+    display: flex;
+    justify-content: space-between;
+    gap: 14px;
+}
+
+/* Cancel */
+#customCancel {
+    flex: 1;
+    background: #eaeaea !important;
+    color: #333 !important;
+    border-radius: 12px;
+    padding: 13px 0;
+    font-size: 17px;
+    border: none;
+}
+
+/* Apply（TikTok 粉紅色） */
+#customApply {
+    flex: 1;
+    background: #ff0050 !important;
+    color: white !important;
+    border-radius: 12px;
+    padding: 13px 0;
+    font-size: 17px;
+    border: none;
+}
