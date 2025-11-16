@@ -306,3 +306,21 @@ body {
     margin-top: 12px;   /* 往下 12px，你想再多我也可以微調 */
 }
 #c
+/* Custom Number Pad Layout */
+.number-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.number-grid button {
+    padding: 14px 0;
+    font-size: 18px;
+    border-radius: 12px;
+    border: 1px solid #ddd;
+    background: #f7f7f7;
+}
+.number-grid button:active {
+    background: #e5e5e5;
+}
