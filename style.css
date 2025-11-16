@@ -23,10 +23,18 @@ body {
     width: 38px;
     height: 38px;
     border-radius: 8px;
+    object-fit: contain;
 }
 
-.title { font-size: 22px; font-weight: 700; }
-.subtitle { font-size: 14px; color: #666; }
+.title {
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.subtitle {
+    font-size: 14px;
+    color: #666;
+}
 
 /* SEARCH */
 .search-row {
@@ -35,19 +43,27 @@ body {
     padding: 0 14px;
     margin-top: 10px;
 }
-#tiktokId, #customCoins {
+
+#tiktokId {
     flex: 1;
     padding: 12px;
     border-radius: 12px;
     border: 1px solid #ddd;
+    font-size: 16px;
 }
+
 #searchBtn {
     padding: 0 18px;
     border-radius: 12px;
     background: #f1f1f1;
     border: 1px solid #ddd;
 }
-#searchBtn:active { opacity: .7; transform: scale(.97); }
+
+#searchBtn:active {
+    opacity: 0.7;
+    transform: scale(0.97);
+    transition: 0.1s;
+}
 
 /* TITLE */
 .container h1 {
@@ -56,44 +72,64 @@ body {
     padding: 20px 14px 16px;
 }
 
-/* GRID */
+/* GRID – 3 Columns */
 .grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 14px;
     padding: 0 14px;
 }
+
+/* Coin Card */
 .card {
     padding: 18px 10px;
     background: #fafafa;
     border-radius: 16px;
     text-align: center;
     border: 1px solid #eee;
+    transition: 0.15s;
 }
-.card .icon { width: 48px; height: 48px; }
-.amount { font-size: 20px; font-weight: bold; }
-.usd { color: #666; }
 
+.card .icon {
+    width: 48px;
+    height: 48px;
+}
+
+.amount {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.usd {
+    color: #666;
+    font-size: 14px;
+}
+
+/* Selected Card Highlight */
 .card.selected {
     border: 2px solid #ff0050 !important;
     background: #ffe6ef !important;
     transform: scale(1.02);
 }
 
-/* BANNER */
+/* Extra Banner */
 .extra-img-box {
     width: 100%;
     padding: 0 15px;
-    margin-top: 10px;
+    margin-top: 12px;
 }
+
 .extra-img {
     width: 100%;
     border-radius: 14px;
-    display: block;
 }
 
-/* SUMMARY */
-.summary-row { padding: 0 14px; margin-top: 20px; }
+/* Selected Summary */
+.summary-row {
+    padding: 0 14px;
+    margin-top: 20px;
+}
+
 .selected-info {
     background: #fafafa;
     padding: 16px;
@@ -101,7 +137,12 @@ body {
     border: 1px solid #eee;
 }
 
-/* BUTTON */
+#selectedText,
+#selectedUSD {
+    font-size: 16px;
+}
+
+/* Recharge Button */
 .recharge-btn {
     width: 100%;
     margin-top: 16px;
@@ -112,17 +153,27 @@ body {
     border-radius: 14px;
     border: none;
 }
-.recharge-btn:disabled { background: #ff8cb3; }
 
-/* MODAL GENERAL */
-.modal {
-    position: fixed; top: 0; left: 0;
-    width: 100%; height: 100%;
-    background: rgba(0,0,0,.35);
-    display: none; justify-content: center; align-items: center;
-    padding: 14px;
+.recharge-btn:disabled {
+    background: #ff8cb3;
 }
-.modal.active { display: flex; }
+
+/* MODAL BASE */
+.modal {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.35);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    padding: 14px;
+    z-index: 999;
+}
+
+.modal.active {
+    display: flex;
+}
 
 .modal-box {
     background: white;
@@ -132,84 +183,130 @@ body {
     max-width: 420px;
 }
 
-/* PAYMENT */
-.method-row { display: flex; flex-direction: column; gap: 12px; }
+/* Payment Method */
+.method-row {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
 .method {
-    display: flex; align-items: center; gap: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
     padding: 12px;
     border: 1px solid #ddd;
     border-radius: 14px;
 }
+
 .method.active {
     border: 2px solid #ff0050;
     background: #ffe6ef;
-}
-.payicon { width: 26px; }
-.visa-icon { width: 38px; }
-
-/* SUCCESS */
-#successModal .modal-box { text-align: center; }
-#checkmark { width: 80px; margin-bottom: 16px; }
-#goBack {
-    background: #ff0050 !important;
-    color: #fff !important;
-    padding: 12px 26px;
-    border-radius: 14px;
-    font-size: 17px;
-    margin-top: 12px;
+    transition: 0.2s;
 }
 
-/* LOADING */
-.loading { position: fixed; top:0; left:0; width:100%; height:100%; display:flex;
-           align-items:center; justify-content:center; background:rgba(255,255,255,0.7); }
-.hidden { display:none; }
-.spinner {
-    width: 40px; height: 40px;
-    border: 4px solid #ddd; border-top-color:#ff0050;
-    border-radius: 50%;
-    animation: spin .7s linear infinite;
-}
-@keyframes spin { to { transform: rotate(360deg); } }
-
-/* ------------------------- */
-/* CUSTOM MODAL (新)         */
-/* ------------------------- */
-.custom-box {
-    margin: 14px auto;
-    padding: 14px;
-    border: 1px solid #ddd;
-    font-size: 20px;
-    border-radius: 12px;
-    width: 100%;
-    text-align: center;
-}
-#popupCoins, #popupUSD {
-    margin-top: 4px;
-    font-size: 15px;
-    color: #444;
+.payicon {
+    width: 26px;
+    height: 26px;
 }
 
-/* Keypad */
-.number-grid {
-    display: grid;
-    grid-template-columns: repeat(4,1fr);
-    gap: 10px;
+.payicon.visa-icon {
+    width: 38px;
 }
-.number-grid button {
-    padding: 14px 0;
-    border-radius: 12px;
-    border: 1px solid #ddd;
-    font-size: 18px;
-    background: #f7f7f7;
-}
-.number-grid button:active { background: #e5e5e5; }
 
-/* Buttons */
+/* Modal Buttons */
 .modal-btn-red {
     background: #ff0050;
-    color: #fff;
+    color: white;
     border: none;
     padding: 12px 22px;
     border-radius: 12px;
     font-size: 16px;
+}
+
+/* Success Modal */
+#successModal .modal-box {
+    text-align: center;
+}
+
+#checkmark {
+    width: 80px;
+    margin-bottom: 16px;
+}
+
+#goBack {
+    background: #ff0050;
+    color: white;
+    padding: 14px 26px;
+    font-size: 17px;
+    border-radius: 14px;
+    border: none;
+    margin-top: 12px;
+}
+
+/* Loading */
+.loading.hidden { display: none; }
+
+.loading {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(255,255,255,0.7);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+}
+
+.spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid #ddd;
+    border-top-color: #ff0050;
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* ------------------------------- */
+/*   Custom Modal – NUMBER PAD     */
+/* ------------------------------- */
+.number-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin-top: 16px;
+}
+
+.number-grid button {
+    padding: 14px 0;
+    font-size: 18px;
+    border-radius: 12px;
+    border: 1px solid #ddd;
+    background: #f7f7f7;
+}
+
+.number-grid button:active {
+    background: #e5e5e5;
+}
+
+/* Custom Modal Input Box */
+#customInputBox {
+    padding: 14px;
+    background: #fafafa;
+    border-radius: 14px;
+    border: 1px solid #ddd;
+    font-size: 20px;
+    margin-bottom: 12px;
+}
+
+/* Custom Exchange Rate (inside modal) */
+#customMiniRate {
+    font-size: 15px;
+    color: #666;
+    margin-bottom: 12px;
 }
