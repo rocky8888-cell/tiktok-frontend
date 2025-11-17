@@ -382,3 +382,15 @@ body {
     border-radius: 12px;
     background: #fff;
 }
+/* ===== Override Payment Modal Buttons ===== */
+.payment-modal .modal-btn-red {
+    background: #ff2d55 !important;
+    color: #fff !important;
+    border: none !important;
+}
+
+.payment-modal .modal-btn-gray {
+    background: #e5e5e5 !important;
+    color: #555 !important;
+    border: none !important;
+}
