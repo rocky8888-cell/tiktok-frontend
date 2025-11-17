@@ -38,7 +38,7 @@ const customBack = document.getElementById("customBack");
 let selected = null;
 
 /* ===== Render cards ===== */
-function renderCards(){
+function renderCards() {
     coinsData.forEach(item => {
         const div = document.createElement("div");
         div.className = "card";
@@ -49,13 +49,10 @@ function renderCards(){
         `;
 
         div.addEventListener("click", () => {
-            // if custom -> open custom popup
             if (item.amount === "Custom") {
-                // don't mark as selected. open bottom modal
                 openCustomModal();
                 return;
             }
-            // regular selection
             document.querySelectorAll(".card").forEach(c => c.classList.remove("selected"));
             div.classList.add("selected");
             selectItem(item);
@@ -66,7 +63,7 @@ function renderCards(){
 }
 
 /* ===== Select fixed item ===== */
-function selectItem(item){
+function selectItem(item) {
     selected = item;
     selectedText.innerText = `Selected: ${item.amount} Coins`;
     selectedUSD.innerText = `US$${Number(item.usd).toFixed(2)}`;
@@ -74,31 +71,29 @@ function selectItem(item){
 }
 
 /* ===== Custom modal helpers ===== */
-function openCustomModal(){
+function openCustomModal() {
     customModal.classList.add("active");
-    // reset
     customInputBox.innerText = "0";
     updateCustomSummary(0);
 }
 
-function closeCustomModal(){
+function closeCustomModal() {
     customModal.classList.remove("active");
 }
 
 /* update custom summary */
-function updateCustomSummary(val){
+function updateCustomSummary(val) {
     const usd = (val * COIN_TO_USD);
     customModalCoins.innerText = `${val} Coins`;
     customModalUSD.innerText = `US$${usd.toFixed(2)}`;
 }
 
 /* number pad events */
-function setupNumberPad(){
+function setupNumberPad() {
     document.querySelectorAll(".num").forEach(btn => {
         btn.addEventListener("click", () => {
             let current = customInputBox.innerText.trim();
             if (current === "0") current = "";
-            // append but prevent insane length
             const next = (current + btn.innerText).slice(0, 10);
             customInputBox.innerText = next || "0";
             updateCustomSummary(Number(customInputBox.innerText));
@@ -108,7 +103,11 @@ function setupNumberPad(){
     document.querySelectorAll(".del").forEach(d => {
         d.addEventListener("click", () => {
             let v = customInputBox.innerText;
-            if (!v || v === "0") { customInputBox.innerText = "0"; updateCustomSummary(0); return; }
+            if (!v || v === "0") { 
+                customInputBox.innerText = "0"; 
+                updateCustomSummary(0); 
+                return;
+            }
             const next = v.length > 1 ? v.slice(0, -1) : "0";
             customInputBox.innerText = next;
             updateCustomSummary(Number(next));
@@ -117,63 +116,55 @@ function setupNumberPad(){
 }
 
 /* ===== Hook buttons ===== */
-function setupButtons(){
-    // main pay button opens payment modal (but only if selected)
+function setupButtons() {
     payBtn.addEventListener("click", () => {
         if (!selected) return;
         paymentModal.classList.add("active");
     });
 
-    // payment modal cancel
     cancelPay.addEventListener("click", () => paymentModal.classList.remove("active"));
 
-    // confirm pay in payment modal => simulate loading -> success
     confirmPay.addEventListener("click", () => {
         paymentModal.classList.remove("active");
         doPaymentFlow();
     });
 
-    // success modal goBack reloads page (or just close)
     goBack.addEventListener("click", () => {
-        // keep page but reset selected
         successModal.classList.remove("active");
-        // optional: reset everything
         location.reload();
     });
 
-    // custom modal back button
     customBack.addEventListener("click", () => closeCustomModal());
 
-    // custom modal Recharge button -> open payment modal and use selected from custom
     customRechargeBtn.addEventListener("click", () => {
         const val = Number(customInputBox.innerText);
-        if (!val || val <= 0) return; // do nothing
+        if (!val || val <= 0) return;
+
         const usd = (val * COIN_TO_USD).toFixed(2);
         selected = { amount: val, usd: usd };
-        // update main selected display
+
         selectedText.innerText = `Selected: ${val} Coins`;
         selectedUSD.innerText = `US$${usd}`;
+
         payBtn.disabled = false;
-        // close custom and open payment modal
+
         closeCustomModal();
         paymentModal.classList.add("active");
     });
 }
 
 /* payment flow */
-function doPaymentFlow(){
-    // show loading
+function doPaymentFlow() {
     loading.classList.remove("hidden");
     setTimeout(() => {
         loading.classList.add("hidden");
-        // show success
         coinsResult.innerText = `Recharged ${selected.amount} Coins`;
         successModal.classList.add("active");
     }, 1800);
 }
 
-/* payment method selection styling */
-function setupMethodSelection(){
+/* payment method selection */
+function setupMethodSelection() {
     const methods = document.querySelectorAll(".method");
     methods.forEach(m => {
         m.addEventListener("click", () => {
@@ -184,7 +175,7 @@ function setupMethodSelection(){
 }
 
 /* init */
-function init(){
+function init() {
     renderCards();
     setupNumberPad();
     setupButtons();
@@ -192,6 +183,8 @@ function init(){
 }
 
 document.addEventListener("DOMContentLoaded", init);
+
+/* ===== Fullscreen ===== */
 function openFullscreen() {
     const elem = document.documentElement;
 
