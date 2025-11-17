@@ -407,3 +407,28 @@ body {
 .modal-actions .modal-btn-red:hover {
     opacity: 0.85;
 }
+/* ===== Payment Modal Recharge Button (Bigger + Bottom Right) ===== */
+
+.payment-centered .modal-actions {
+    display: flex;
+    justify-content: flex-end;   /* 右側對齊 */
+    gap: 12px;
+    padding: 0 6px 0 6px;
+}
+
+.payment-centered .modal-btn-red {
+    background: #ff2d55 !important;
+    color: #fff !important;
+    padding: 14px 26px !important;   /* 放大 */
+    font-size: 17px !important;
+    font-weight: 700 !important;
+    border-radius: 12px !important;
+}
+
+.payment-centered .modal-btn-gray {
+    background: #e5e5e5 !important;
+    color: #333 !important;
+    padding: 14px 22px !important;
+    font-size: 16px !important;
+    border-radius: 12px !important;
+}
