@@ -136,3 +136,44 @@ body { background:white; padding-bottom:60px; }
 .grid {
     gap: 22px !important;
 }
+/* 正確 TikTok 金幣格子大小 */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);   /* 手機 → 一排兩個 */
+    gap: 14px;
+    width: 100%;
+    padding: 0 14px;
+    box-sizing: border-box;
+}
+
+.card {
+    background: #fff;
+    border-radius: 14px;
+    padding: 20px 10px;
+    text-align: center;
+    border: 1px solid #eee;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+
+.card .icon {
+    width: 52px;
+    height: 52px;
+}
+
+.card .amount {
+    font-size: 24px;
+    font-weight: 600;
+    margin-top: 10px;
+}
+
+.card .usd {
+    font-size: 16px;
+    color: #777;
+    margin-top: 4px;
+}
+
+/* 選取效果回復成原本 TikTok 那種 */
+.card.selected {
+    border: 2px solid #ff0050;
+    background: #ffe6f0;
+}
