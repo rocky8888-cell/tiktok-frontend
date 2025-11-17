@@ -66,10 +66,10 @@ body {
     z-index: 9999;
 }
 
-/* 小窗高度再加大 = 手機螢幕的 75% */
+/* ⭐ 小窗加高版（75vh） */
 .custom-modal {
     width: 100%;
-    height: 75vh;
+    height: 75vh;         /* ← 你要的更高 */
     background: #fff;
     border-radius: 26px 26px 0 0;
     padding: 20px;
@@ -82,7 +82,7 @@ body {
     to { transform: translateY(0); }
 }
 
-/* 返回箭頭 */
+/* 返回鍵 */
 .custom-back {
     font-size: 30px;
     font-weight: 400;
@@ -90,7 +90,7 @@ body {
     padding-bottom: 8px;
 }
 
-/* Title */
+/* 標題 */
 .custom-title {
     text-align: center;
     margin-top: -20px;
@@ -105,7 +105,7 @@ body {
     color: #666;
 }
 
-/* Display large number */
+/* 顯示輸入數字 */
 .custom-display {
     width: 100%;
     padding: 22px 0;
@@ -117,7 +117,7 @@ body {
     margin-bottom: 10px;
 }
 
-/* Coins & Price text */
+/* Coins 與 Price */
 .custom-sub {
     text-align: center;
     font-size: 17px;
@@ -128,7 +128,7 @@ body {
 /*   Keypad (numbers)         */
 /* ========================= */
 
-/* 整個鍵盤高度增加 */
+/* ⭐ 整個鍵盤高度 + 間距保持不動 */
 .keypad {
     margin-top: 14px;
     display: grid;
@@ -136,14 +136,14 @@ body {
     gap: 12px;
 }
 
-/* 數字鍵 */
+/* ⭐ 數字鍵變黑色 + 更粗 */
 .key {
     background: #f5f5f5;
     padding: 20px 0;
     border-radius: 14px;
     font-size: 22px;
-    font-weight: 700;   /* 再加粗 */
-    color: #000;        /* 改黑色 */
+    font-weight: 800;   /* ← 比 700 再粗一點 */
+    color: #000;        /* ← 變成黑色 */
     text-align: center;
     user-select: none;
 }
