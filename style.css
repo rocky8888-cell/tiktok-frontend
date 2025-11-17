@@ -1,80 +1,271 @@
 /* ========================= */
-/*   Base & Layout           */
+/*   Base Layout             */
 /* ========================= */
-body {
+* {
     margin: 0;
+    padding: 0;
+    box-sizing: border-box;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+body {
     background: #fff;
     color: #000;
-}
-
-.container {
-    padding: 16px;
+    padding-bottom: 60px;
 }
 
 /* ========================= */
-/*   Coin Cards               */
+/*   HEADER                  */
 /* ========================= */
-.coin-card {
-    width: 31%;
-    background: #fff;
-    padding: 18px 0;
+.topbar {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 14px 10px;
+}
+
+.logo {
+    width: 38px;
+    height: 38px;
+    border-radius: 8px;
+}
+
+.title {
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.subtitle {
+    font-size: 14px;
+    color: #666;
+}
+
+/* ========================= */
+/*   SEARCH                  */
+/* ========================= */
+.search-row {
+    display: flex;
+    gap: 10px;
+    padding: 0 14px;
+    margin-top: 10px;
+}
+
+#tiktokId,
+#customCoins {
+    flex: 1;
+    padding: 12px;
+    border-radius: 12px;
+    border: 1px solid #ddd;
+    font-size: 16px;
+}
+
+#searchBtn {
+    padding: 0 18px;
+    border-radius: 12px;
+    background: #f1f1f1;
+    border: 1px solid #ddd;
+}
+
+#searchBtn:active {
+    opacity: 0.7;
+    transform: scale(0.97);
+}
+
+/* ========================= */
+/*   TITLE                   */
+/* ========================= */
+.container h1 {
+    font-size: 26px;
+    font-weight: 700;
+    padding: 20px 14px 16px;
+}
+
+/* ========================= */
+/*   COIN GRID               */
+/* ========================= */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    padding: 0 14px;
+}
+
+.card {
+    padding: 18px 10px;
+    background: #fafafa;
     border-radius: 16px;
     text-align: center;
-    border: 2px solid #f2f2f2;
+    border: 1px solid #eee;
     transition: 0.15s;
 }
 
-.coin-card.selected {
-    border: 3px solid #ff2d55;
-    background: #ffe6f0;
+.card .icon {
+    width: 48px;
+    height: 48px;
 }
 
-.coin-card img {
-    width: 46px;
-    height: 46px;
+.card.selected {
+    border: 2px solid #ff0050 !important;
+    background: #ffe6ef !important;
+    transform: scale(1.02);
 }
 
 /* ========================= */
-/*   Recharge Button          */
+/*   SUMMARY + BUTTON        */
 /* ========================= */
+.summary-row {
+    padding: 0 14px;
+    margin-top: 20px;
+}
+
+.selected-info {
+    background: #fafafa;
+    padding: 16px;
+    border-radius: 16px;
+    border: 1px solid #eee;
+}
+
 .recharge-btn {
     width: 100%;
-    padding: 18px 0;
-    margin-top: 20px;
-    background: #ff2d55;
-    color: #fff;
-    font-size: 20px;
-    font-weight: 600;
-    border-radius: 12px;
+    margin-top: 16px;
+    padding: 16px;
+    font-size: 18px;
+    background: #ff0050;
+    color: white;
+    border-radius: 14px;
     border: none;
 }
 
+.recharge-btn:disabled {
+    background: #ff8cb3;
+}
+
 /* ========================= */
-/*   Custom Modal             */
+/*   EXTRA BANNER            */
 /* ========================= */
-.modal-overlay {
+.extra-img-box {
+    width: 100%;
+    padding: 0 15px;
+    margin-top: 10px;
+}
+
+.extra-img {
+    width: 100%;
+    border-radius: 14px;
+    display: block;
+}
+
+/* ========================= */
+/*   PAYMENT MODAL           */
+/* ========================= */
+.modal {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0,0,0,0.45);
+    background: rgba(0,0,0,0.35);
     display: none;
     justify-content: center;
-    align-items: flex-end;
-    z-index: 9999;
+    align-items: center;
+    padding: 14px;
+    z-index: 999;
 }
 
-/* 小窗高度 → 75% 螢幕 */
-.custom-modal {
+.modal.active {
+    display: flex;
+}
+
+.modal-box {
+    background: white;
+    padding: 22px;
+    border-radius: 18px;
     width: 100%;
-    height: 75vh;
+    max-width: 420px;
+}
+
+.method-row {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.method {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 14px;
+}
+
+.method.active {
+    border: 2px solid #ff0050;
+    background: #ffe6ef;
+}
+
+/* ========================= */
+/*   SUCCESS MODAL           */
+/* ========================= */
+#successModal .modal-box {
+    text-align: center;
+}
+
+#checkmark {
+    width: 80px;
+    margin-bottom: 16px;
+}
+
+/* ========================= */
+/*   LOADING                 */
+/* ========================= */
+.loading.hidden {
+    display: none;
+}
+
+.loading {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255,255,255,0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    z-index: 2000;
+}
+
+.spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid #ddd;
+    border-top-color: #ff0050;
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* ========================= */
+/*   CUSTOM MODAL (BOTTOM)   */
+/* ========================= */
+.modal.bottom {
+    justify-content: flex-end;
+}
+
+.custom-box {
+    width: 100%;
+    height: 75vh;           /* ← 小窗高度提升 */
     background: #fff;
     border-radius: 26px 26px 0 0;
     padding: 20px;
-    box-shadow: 0 0 20px rgba(0,0,0,0.15);
-    animation: slideUp 0.3s ease;
+    animation: slideUp 0.25s ease-out;
 }
 
 @keyframes slideUp {
@@ -82,87 +273,83 @@ body {
     to { transform: translateY(0); }
 }
 
-/* 返回箭頭 */
-.custom-back {
-    font-size: 30px;
-    font-weight: 400;
-    padding-left: 6px;
+/* 返回鍵 */
+.back-btn {
+    font-size: 32px;
+    background: none;
+    border: none;
     padding-bottom: 8px;
 }
 
 /* Title */
-.custom-title {
+.custom-box h2 {
     text-align: center;
-    margin-top: -20px;
+    margin-top: -28px;
     font-size: 22px;
     font-weight: 700;
 }
 
-.custom-range {
+/* Range */
+.small-note {
     text-align: center;
     font-size: 15px;
-    margin-bottom: 12px;
+    margin-bottom: 14px;
     color: #666;
 }
 
-/* Display large number */
-.custom-display {
+/* Display + Summary */
+.custom-input-area {
+    text-align: center;
+}
+
+.custom-input {
     width: 100%;
-    padding: 22px 0;
+    padding: 18px 0;
+    background: #f5f5f5;
+    border-radius: 14px;
     font-size: 40px;
     font-weight: 700;
-    text-align: center;
-    border-radius: 12px;
-    background: #fafafa;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
 }
 
-/* Coins & Price text */
-.custom-sub {
-    text-align: center;
-    font-size: 17px;
+.custom-summary-line {
+    font-size: 18px;
     font-weight: 600;
+    padding: 2px 0;
 }
 
 /* ========================= */
-/*   Keypad (numbers)         */
+/*   NUMBER PAD              */
 /* ========================= */
-.keypad {
-    margin-top: 14px;
+/* 整個鍵盤上提一點 */
+.number-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 12px;
+    margin-top: 16px;
 }
 
-.key {
-    background: #f5f5f5;
-    padding: 22px 0;   /* 稍微加高 */
+/* 數字鍵：黑色 + 更粗 */
+.num,
+.del {
+    background: #f1f1f1;
+    padding: 20px 0;
     border-radius: 14px;
-    font-size: 24px;   /* 字體更大 */
-    font-weight: 800;  /* 更粗 */
-    color: #000;       /* 全黑 */
+    font-size: 24px;
+    font-weight: 800;      /* ← 字體更粗 */
+    color: #000;           /* ← 黑色字體 */
     text-align: center;
-    user-select: none;
+    border: none;
 }
 
-/* Bottom button */
-.custom-modal .recharge-btn {
+.del {
+    font-size: 22px;
+}
+
+/* ========================= */
+/*   CUSTOM Recharge Button   */
+/* ========================= */
+#customRechargeBtn {
     margin-top: 20px;
     width: 100%;
-}
-
-/* ========================= */
-/*   Payment Modal            */
-/* ========================= */
-.payment-modal {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    width: 88%;
-    transform: translate(-50%, -50%);
-    background: #fff;
-    border-radius: 18px;
-    padding: 20px;
-    display: none;
-    z-index: 99999;
 }
