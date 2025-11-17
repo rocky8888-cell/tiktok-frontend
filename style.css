@@ -1,259 +1,173 @@
-/* === Full replacement style.css === */
-
-/* RESET + base */
-*{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
-html,body{height:100%}
-body{
-  background:#fff;
-  -webkit-tap-highlight-color:transparent;
-  padding-bottom:60px;
-  color:#111;
+/* ========================= */
+/*   Base & Layout           */
+/* ========================= */
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: #fff;
+    color: #000;
 }
 
-/* TOPBAR */
-.topbar{
-  display:flex;
-  align-items:center;
-  gap:12px;
-  padding:16px 14px 10px;
-  background:transparent;
-  z-index:50;
-}
-.logo{width:38px;height:38px;border-radius:8px;object-fit:contain}
-.title{font-size:22px;font-weight:700}
-.subtitle{font-size:14px;color:#666}
-
-/* SEARCH */
-.search-row{display:flex;gap:10px;padding:0 14px;margin-top:10px}
-#tiktokId{flex:1;padding:12px;border-radius:12px;border:1px solid #eee;font-size:16px}
-#searchBtn{padding:0 18px;border-radius:12px;background:#f1f1f1;border:1px solid #ddd}
-
-/* PAGE TITLE */
-.container h1{font-size:26px;font-weight:700;padding:20px 14px 16px}
-
-/* ===== Grid of coin cards (bigger) ===== */
-.grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:14px;
-  padding:0 14px 14px;
+.container {
+    padding: 16px;
 }
 
-/* Make cards larger and more like TikTok */
-.card{
-  padding:22px 12px;
-  background:#fafafa;
-  border-radius:18px;
-  text-align:center;
-  border:1px solid #f0eff0;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  gap:8px;
-  transition:transform .12s ease, box-shadow .12s;
-  cursor:pointer;
-  min-height:120px;
-}
-.card:hover{transform:translateY(-4px)}
-.card .icon{width:64px;height:64px;object-fit:contain}
-.card .amount{font-size:22px;font-weight:800;color:#000}
-.card .usd{color:#666;font-size:14px}
-
-/* selected state */
-.card.selected{
-  border:2px solid #ff0050 !important;
-  background:#ffe6ef !important;
-  transform:scale(1.02) !important;
-  box-shadow:0 6px 20px rgba(0,0,0,0.06);
+/* ========================= */
+/*   Coin Cards               */
+/* ========================= */
+.coin-card {
+    width: 31%;
+    background: #fff;
+    padding: 18px 0;
+    border-radius: 16px;
+    text-align: center;
+    border: 2px solid #f2f2f2;
+    transition: 0.15s;
 }
 
-/* Custom input row (desktop fallback) */
-.custom-row{
-  display:flex;align-items:center;gap:12px;padding:0 14px;margin-top:20px;
-}
-#customCoins{flex:1;padding:12px;border-radius:12px;border:1px solid #ddd;font-size:16px}
-.custom-summary{text-align:right;font-size:14px;color:#333}
-
-/* Selected info and recharge */
-.summary-row{padding:0 14px;margin-top:20px;display:flex;gap:12px;align-items:center;justify-content:space-between}
-.selected-info{background:#fafafa;padding:16px;border-radius:16px;border:1px solid #eee;flex:1}
-.recharge-btn{
-  min-width:160px;
-  margin-top:0;
-  padding:16px 22px;font-size:18px;background:#ff0050;color:#fff;border-radius:14px;border:none;
-  cursor:pointer;
-}
-.recharge-btn:disabled{background:#ff8cb3;cursor:not-allowed}
-
-/* Extra images / banners */
-.extra-img-box{width:100%;padding:0 15px;margin-top:10px}
-.extra-img{width:100%;border-radius:14px;display:block}
-
-/* ===== Modal base ===== */
-.modal{
-  position:fixed;top:0;left:0;width:100%;height:100%;
-  background:rgba(0,0,0,0.35);
-  display:none;justify-content:center;align-items:center;padding:14px;z-index:2000;
-  -webkit-overflow-scrolling:touch;
-}
-.modal.active{display:flex}
-
-/* Generic modal-box default (centered, used by payment modal) */
-.modal-box{
-  background:#fff;padding:22px;border-radius:18px;width:100%;max-width:520px;box-shadow:0 10px 30px rgba(0,0,0,0.12);
+.coin-card.selected {
+    border: 3px solid #ff2d55;
+    background: #ffe6f0;
 }
 
-/* Method row inside payment modal */
-.method-row{display:flex;flex-direction:column;gap:12px}
-.method{
-  display:flex;align-items:center;gap:10px;padding:12px;border-radius:12px;border:1px solid #eee;background:#fff;cursor:pointer;
-}
-.method img.payicon{width:28px;height:auto}
-.method.active{border:2px solid #ff0050;background:#ffe6ef}
-
-/* Success modal adjustments */
-#successModal .modal-box{text-align:center}
-#checkmark{width:80px;margin-bottom:16px}
-
-/* Loading overlay */
-.loading{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(255,255,255,0.7);display:flex;flex-direction:column;justify-content:center;align-items:center;z-index:3000}
-.loading.hidden{display:none}
-.spinner{width:40px;height:40px;border:4px solid #ddd;border-top-color:#ff0050;border-radius:50%;animation:spin .7s linear infinite}
-@keyframes spin{to{transform:rotate(360deg)}}
-
-/* Modal buttons (red) */
-.modal-btn-red{background:#ff0050;color:#fff;border:none;padding:12px 22px;border-radius:12px;font-size:16px;cursor:pointer}
-.modal-btn-grey{background:#ccc;color:#222;border:none;padding:12px 22px;border-radius:12px;font-size:16px;cursor:pointer}
-
-/* ===========================
-   CUSTOM POPUP (bottom sheet)
-   - This overrides modal for #customModal specifically
-   - On mobile it appears as bottom half-sheet
-   =========================== */
-#customModal.modal{
-  align-items:flex-end;
-  padding:0;
-  background:rgba(0,0,0,0.35);
-}
-#customModal .modal-box{
-  width:100%;
-  max-width:100%;
-  padding:18px 18px 22px;
-  border-radius:18px 18px 0 0;
-  height:55vh;            /* 約手機下半 */
-  max-height:70vh;
-  overflow:hidden;
-  display:flex;
-  flex-direction:column;
-  justify-content:flex-start;
-  box-sizing:border-box;
+.coin-card img {
+    width: 46px;
+    height: 46px;
 }
 
-/* Custom modal inner layout */
-#customModal h2{margin:4px 0 8px;font-size:20px;text-align:center}
-#customRange{font-size:14px;text-align:center;color:#666;margin-bottom:8px}
-
-/* input display (large) */
-#customInputBox{
-  padding:14px;border-radius:12px;border:1px solid #eee;font-size:28px;text-align:center;background:#fff;margin-bottom:8px;
-  flex:0 0 auto;
-}
-#customModalCoins,#customModalUSD{text-align:center;color:#222}
-
-/* number pad grid inside custom modal */
-.number-grid{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:12px;
-  margin-top:12px;
-  flex:0 0 auto;
-}
-.number-grid button{
-  padding:18px 0;font-size:18px;border-radius:12px;border:1px solid #eee;background:#fafafa;color:#1b78d6;
-  cursor:pointer;
-}
-.number-grid button:active{background:#eee}
-
-/* place recharge button INSIDE custom modal bottom (full width) */
-#customRechargeBtn{
-  margin-top:auto;            /* push to bottom */
-  width:100%;
-  padding:16px;
-  font-size:18px;
-  background:#ff0050;
-  color:#fff;
-  border-radius:12px;
-  border:none;
-  cursor:pointer;
-  box-shadow:0 6px 20px rgba(255,0,85,0.12);
+/* ========================= */
+/*   Recharge Button          */
+/* ========================= */
+.recharge-btn {
+    width: 100%;
+    padding: 18px 0;
+    margin-top: 20px;
+    background: #ff2d55;
+    color: #fff;
+    font-size: 20px;
+    font-weight: 600;
+    border-radius: 12px;
+    border: none;
 }
 
-/* Hide default cancel/apply inside custom modal if present (we remove them) */
-#customModal .modal-actions{display:none}
-
-/* ===== Payment modal adjustments (centered & slightly larger) ===== */
-#paymentModal .modal-box{
-  max-width:520px;
-  width:92%;
-  border-radius:18px;
-  padding:20px;
-  transform-origin:center;
-}
-#paymentModal.modal{align-items:center;}
-
-/* ensure action buttons are visible and not clipped */
-#paymentModal .modal-actions{display:flex;gap:12px;justify-content:flex-start;padding-top:14px}
-#paymentModal .modal-actions button{min-width:120px}
-
-/* ===== Desktop vs Mobile tweaks ===== */
-@media (min-width:900px){
-  .grid{grid-template-columns:repeat(3,1fr);padding:0 30px}
-  .card{min-height:150px;padding:26px}
-  #customModal .modal-box{width:520px;height:auto;border-radius:18px}
-  #customModal.modal{align-items:center}
+/* ========================= */
+/*   Custom Modal (Small Window) */
+/* ========================= */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.45);
+    display: none;
+    justify-content: center;
+    align-items: flex-end;
+    z-index: 9999;
 }
 
-/* Mobile small screens: slightly increase hit area and spacing */
-@media (max-width:420px){
-  .card .icon{width:56px;height:56px}
-  .card .amount{font-size:20px}
-  .card{padding:18px;min-height:110px}
-  .modal-box{padding:16px}
-  #customModal .modal-box{height:60vh}
+/* 小窗高度再加大 = 手機螢幕的 75% */
+.custom-modal {
+    width: 100%;
+    height: 75vh;
+    background: #fff;
+    border-radius: 26px 26px 0 0;
+    padding: 20px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.15);
+    animation: slideUp 0.3s ease;
 }
 
-/* ===== Accessibility & overrides ===== */
-button, .card{outline:none}
-button:focus, .card:focus{box-shadow:0 0 0 3px rgba(255,0,85,0.12)}
-/* ===========================
-   Custom Modal Keypad Numbers
-   =========================== */
-.keypad button {
-    color: #000 !important;      /* 數字改成黑色 */
-    font-weight: 600 !important; /* 稍微粗一點 */
-}
-/* 強化 Custom 小窗整體字體粗度 */
-#customModal,
-#customModal * {
-    font-weight: 700 !important;
+@keyframes slideUp {
+    from { transform: translateY(100%); }
+    to { transform: translateY(0); }
 }
 
-/* 若覺得太粗，可改為 600 */
-/* ============================
-   1) 小窗再高一點（整個 modal）
-   ============================ */
-#customModal .modal-content {
-    max-height: 80vh !important;  /* 原本 70%，改成 80% */
-    height: 80vh !important;
+/* 返回箭頭 */
+.custom-back {
+    font-size: 30px;
+    font-weight: 400;
+    padding-left: 6px;
+    padding-bottom: 8px;
 }
 
-/* ============================
-   2) 鍵盤字體更粗（不影響外面字體）
-   ============================ */
-.keypad button span,
-.keypad button {
-    font-weight: 800 !important;   /* 比之前更粗 */
-    color: #000 !important;        /* 保持黑色 */
-    font-size: 1.4rem !important;  /* 讓按鍵字體更清楚 */
+/* Title */
+.custom-title {
+    text-align: center;
+    margin-top: -20px;
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.custom-range {
+    text-align: center;
+    font-size: 15px;
+    margin-bottom: 12px;
+    color: #666;
+}
+
+/* Display large number */
+.custom-display {
+    width: 100%;
+    padding: 22px 0;
+    font-size: 40px;
+    font-weight: 700;
+    text-align: center;
+    border-radius: 12px;
+    background: #fafafa;
+    margin-bottom: 10px;
+}
+
+/* Coins & Price text */
+.custom-sub {
+    text-align: center;
+    font-size: 17px;
+    font-weight: 600;
+}
+
+/* ========================= */
+/*   Keypad (numbers)         */
+/* ========================= */
+
+/* 整個鍵盤高度增加 */
+.keypad {
+    margin-top: 14px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+}
+
+/* 數字鍵 */
+.key {
+    background: #f5f5f5;
+    padding: 20px 0;
+    border-radius: 14px;
+    font-size: 22px;
+    font-weight: 700;   /* 再加粗 */
+    color: #000;        /* 改黑色 */
+    text-align: center;
+    user-select: none;
+}
+
+/* ========================= */
+/*   Bottom Recharge Button   */
+/* ========================= */
+.custom-modal .recharge-btn {
+    margin-top: 20px;
+    width: 100%;
+}
+
+/* ========================= */
+/*   Payment Modal (unchanged)*/
+/* ========================= */
+.payment-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 88%;
+    transform: translate(-50%, -50%);
+    background: #fff;
+    border-radius: 18px;
+    padding: 20px;
+    display: none;
+    z-index: 99999;
 }
