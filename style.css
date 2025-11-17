@@ -226,3 +226,10 @@ body{
 /* ===== Accessibility & overrides ===== */
 button, .card{outline:none}
 button:focus, .card:focus{box-shadow:0 0 0 3px rgba(255,0,85,0.12)}
+/* ===========================
+   Custom Modal Keypad Numbers
+   =========================== */
+.keypad button {
+    color: #000 !important;      /* 數字改成黑色 */
+    font-weight: 600 !important; /* 稍微粗一點 */
+}
