@@ -394,3 +394,16 @@ body {
     color: #555 !important;
     border: none !important;
 }
+/* ====== Override Payment Modal Buttons (Red Background) ====== */
+.modal-actions .modal-btn-gray,
+.modal-actions .modal-btn-red {
+    background: #ff2d55 !important;
+    color: #fff !important;
+    border: none !important;
+    font-weight: 600 !important;
+}
+
+.modal-actions .modal-btn-gray:hover,
+.modal-actions .modal-btn-red:hover {
+    opacity: 0.85;
+}
