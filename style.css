@@ -13,7 +13,7 @@ body {
 }
 
 /* ========================= */
-/*   Coin Cards — 主頁（不改動） */
+/*   Coin Cards               */
 /* ========================= */
 .coin-card {
     width: 31%;
@@ -36,7 +36,7 @@ body {
 }
 
 /* ========================= */
-/*   Recharge Button — 主頁   */
+/*   Recharge Button          */
 /* ========================= */
 .recharge-btn {
     width: 100%;
@@ -51,7 +51,7 @@ body {
 }
 
 /* ========================= */
-/*   Custom Modal（小窗）     */
+/*   Custom Modal             */
 /* ========================= */
 .modal-overlay {
     position: fixed;
@@ -66,10 +66,10 @@ body {
     z-index: 9999;
 }
 
-/* 整個小窗高度加大到 78vh，不影響主頁 */
+/* 小窗高度 → 75% 螢幕 */
 .custom-modal {
     width: 100%;
-    height: 78vh;
+    height: 75vh;
     background: #fff;
     border-radius: 26px 26px 0 0;
     padding: 20px;
@@ -84,16 +84,16 @@ body {
 
 /* 返回箭頭 */
 .custom-back {
-    font-size: 32px;
+    font-size: 30px;
     font-weight: 400;
     padding-left: 6px;
-    padding-bottom: 10px;
+    padding-bottom: 8px;
 }
 
 /* Title */
 .custom-title {
     text-align: center;
-    margin-top: -18px;
+    margin-top: -20px;
     font-size: 22px;
     font-weight: 700;
 }
@@ -105,11 +105,11 @@ body {
     color: #666;
 }
 
-/* 顯示數字 */
+/* Display large number */
 .custom-display {
     width: 100%;
     padding: 22px 0;
-    font-size: 42px;
+    font-size: 40px;
     font-weight: 700;
     text-align: center;
     border-radius: 12px;
@@ -117,6 +117,7 @@ body {
     margin-bottom: 10px;
 }
 
+/* Coins & Price text */
 .custom-sub {
     text-align: center;
     font-size: 17px;
@@ -124,39 +125,34 @@ body {
 }
 
 /* ========================= */
-/*        Keypad 鍵盤         */
+/*   Keypad (numbers)         */
 /* ========================= */
-
-/* 增加鍵盤區域高度 */
 .keypad {
-    margin-top: 16px;
+    margin-top: 14px;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 14px;
+    gap: 12px;
 }
 
-/* 數字鍵更粗 + 黑色 */
 .key {
     background: #f5f5f5;
-    padding: 22px 0;
+    padding: 22px 0;   /* 稍微加高 */
     border-radius: 14px;
-    font-size: 24px;
-    font-weight: 800;   /* 字體再更粗 */
-    color: #000;        /* 黑色 */
+    font-size: 24px;   /* 字體更大 */
+    font-weight: 800;  /* 更粗 */
+    color: #000;       /* 全黑 */
     text-align: center;
     user-select: none;
 }
 
-/* ========================= */
-/*   小窗內的 Recharge 按鈕    */
-/* ========================= */
+/* Bottom button */
 .custom-modal .recharge-btn {
     margin-top: 20px;
     width: 100%;
 }
 
 /* ========================= */
-/*   Payment Modal（不改動） */
+/*   Payment Modal            */
 /* ========================= */
 .payment-modal {
     position: fixed;
