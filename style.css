@@ -1,179 +1,271 @@
 /* RESET */
-* { margin:0; padding:0; box-sizing:border-box; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
-body { background:white; padding-bottom:60px; }
-
-/* HEADER */
-.topbar { display:flex; align-items:center; gap:12px; padding:16px 14px 10px; position:sticky; top:0; background:rgba(255,255,255,0.95); z-index:10; }
-.logo { width:38px; height:38px; border-radius:8px; object-fit:contain; }
-.title { font-size:22px; font-weight:700; }
-.subtitle { font-size:14px; color:#666; }
-
-/* SEARCH */
-.search-row { display:flex; gap:10px; padding:0 14px; margin-top:10px; }
-#tiktokId { flex:1; padding:12px; border-radius:12px; border:1px solid #ddd; font-size:16px; }
-#searchBtn { padding:0 18px; border-radius:12px; background:#f1f1f1; border:1px solid #ddd; }
-
-/* TITLE */
-.container h1 { font-size:26px; font-weight:700; padding:20px 14px 16px; }
-
-/* GRID */
-.grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; padding:0 14px; }
-.card { padding:18px 10px; background:#fafafa; border-radius:16px; text-align:center; border:1px solid #eee; cursor:pointer; }
-.card .icon { width:48px; height:48px; margin:auto; display:block; }
-.card .amount { font-size:20px; font-weight:700; margin-top:8px; }
-.card .usd { color:#666; margin-top:6px; }
-
-/* custom summary / selected */
-.summary-row { padding:0 14px; margin-top:20px; display:flex; gap:12px; align-items:center; }
-.selected-info { flex:1; background:#fafafa; padding:16px; border-radius:16px; border:1px solid #eee; }
-.recharge-btn { padding:16px 20px; background:#ff0050; color:#fff; border-radius:14px; border:none; font-size:18px; cursor:pointer; }
-.recharge-btn:disabled { background:#ff8cb3; cursor:not-allowed; }
-
-/* modal base */
-.modal { position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.35); display:none; justify-content:center; align-items:center; padding:14px; z-index:999; }
-.modal.active { display:flex; }
-
-/* modal box */
-.modal-box { background:#fff; padding:22px; border-radius:18px; width:100%; max-width:420px; box-shadow:0 8px 24px rgba(0,0,0,0.12); }
-
-/* payment modal larger + centered */
-.payment-centered { max-width:520px; }
-
-/* method list */
-.method-row { display:flex; flex-direction:column; gap:12px; margin-top:12px; }
-.method { display:flex; align-items:center; gap:10px; padding:12px; border:1px solid #ddd; border-radius:14px; }
-.payicon { width:26px; height:26px; }
-.payicon.visa-icon { width:38px; height:auto; }
-
-/* modal actions */
-.modal-actions { display:flex; gap:12px; margin-top:16px; justify-content:flex-end; }
-.modal-btn-red { background:#ff0050; color:white; border:none; padding:12px 22px; border-radius:12px; font-size:16px; }
-.modal-btn-gray { background:#eee; color:#444; border:none; padding:12px 18px; border-radius:12px; font-size:16px; }
-
-/* success modal */
-.success-box { text-align:center; }
-#checkmark { width:80px; margin-bottom:16px; }
-
-/* loading */
-.loading.hidden { display:none; }
-.loading { position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(255,255,255,0.7); display:flex; flex-direction:column; justify-content:center; align-items:center; z-index:2000; }
-.spinner { width:40px; height:40px; border:4px solid #ddd; border-top-color:#ff0050; border-radius:50%; animation:spin .7s linear infinite; }
-@keyframes spin { to { transform:rotate(360deg); } }
-.loading-text { margin-top:12px; font-size:16px; }
-
-/* selected card */
-.card.selected { border:2px solid #ff0050 !important; background:#ffe6ef !important; transform:scale(1.02); transition:0.15s; }
-
-/* bottom custom modal (70% height, anchored bottom) */
-.modal.bottom { align-items:flex-end; }
-.custom-box { max-width:100%; width:100%; border-radius:18px 18px 0 0; padding:18px 18px 22px; box-sizing:border-box; height:70vh; overflow:hidden; position:relative; display:flex; flex-direction:column; justify-content:flex-start; }
-.back-btn { position:absolute; left:14px; top:14px; background:transparent; border:none; font-size:22px; }
-.custom-box h2 { text-align:center; margin-top:6px; font-size:20px; font-weight:700; }
-.small-note { text-align:center; color:#666; margin-top:6px; margin-bottom:12px; }
-
-/* custom input area */
-.custom-input-area { text-align:center; margin-bottom:8px; }
-.custom-input { padding:14px; border:1px solid #ddd; border-radius:12px; font-size:28px; text-align:center; margin-bottom:8px; }
-.custom-summary-line { font-size:16px; color:#333; margin-top:4px; }
-
-/* number grid */
-.number-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-top:6px; flex:0 0 auto; }
-.number-grid button { padding:16px 0; font-size:18px; border-radius:12px; border:1px solid #eee; background:#fafafa; cursor:pointer; }
-.number-grid button:active { background:#eee; }
-
-/* custom Recharge button bottom */
-.custom-box .recharge-btn { margin-top:auto; width:100%; }
-
-/* responsive tweaks */
-@media(min-width:900px) {
-    .grid { grid-template-columns:repeat(4,1fr); }
-    .custom-box { width:520px; height:auto; border-radius:18px; align-self:center; }
-    .modal.bottom { align-items:center; }
-}
-/* --- Enlarge coin cards --- */
-.grid {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 18px; /* 卡片間距大一點更像TikTok */
-}
-
-.card {
-    padding: 24px 0;  /* 讓卡片更高 */
-    border-radius: 18px;
-    font-size: 18px;
-}
-
-/* Coin icon bigger */
-.card .icon {
-    width: 58px;
-    height: 58px;
-    margin-bottom: 10px;
-}
-
-/* Amount bigger */
-.card .amount {
-    font-size: 22px;
-    font-weight: 700;
-}
-
-/* USD bigger */
-.card .usd {
-    font-size: 17px;
-    margin-top: 4px;
-}
-
-/* Selected border thicker & brighter */
-.card.selected {
-    border: 3px solid #ff2d55;
-    background: #ffeaf0;
-}
-/* 放大金幣選項卡片 */
-.card {
-    transform: scale(1.15);   /* 放大 15% */
-    transform-origin: center;
-}
-
-/* 放大後避免卡片擠在一起，增加間距 */
-.grid {
-    gap: 22px !important;
-}
-/* 正確 TikTok 金幣格子大小 */
-.grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);   /* 手機 → 一排兩個 */
-    gap: 14px;
-    width: 100%;
-    padding: 0 14px;
+* {
+    margin: 0;
+    padding: 0;
     box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #fff;
+    padding-bottom: 80px;
+}
+
+/* ---------- Header ---------- */
+.topbar {
+    display: flex;
+    align-items: center;
+    padding: 14px;
+    gap: 10px;
+}
+
+.logo {
+    width: 38px;
+}
+
+.brand-text .title {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.brand-text .subtitle {
+    font-size: 13px;
+    color: #777;
+}
+
+/* ---------- Search ---------- */
+.search-row {
+    display: flex;
+    gap: 10px;
+    padding: 10px 14px;
+}
+
+.search-row input {
+    flex: 1;
+    padding: 14px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+}
+
+.search-row button {
+    padding: 14px 22px;
+    border-radius: 10px;
+    border: none;
+    background: #eee;
+}
+
+/* ---------- Title ---------- */
+.container h1 {
+    padding: 12px 14px;
+    font-size: 26px;
+    font-weight: bold;
+}
+
+/* ---------- Coins Grid ---------- */
+.grid {
+    padding: 10px 12px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
 }
 
 .card {
-    background: #fff;
-    border-radius: 14px;
-    padding: 20px 10px;
+    background: #fafafa;
+    border-radius: 18px;
+    padding: 18px 10px;
     text-align: center;
-    border: 1px solid #eee;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    border: 2px solid transparent;
+    transition: 0.2s;
+}
+
+.card.selected {
+    border: 3px solid #ff0050;
+    background: #ffe8f0;
 }
 
 .card .icon {
-    width: 52px;
-    height: 52px;
+    width: 48px;
+    margin-bottom: 5px;
 }
 
 .card .amount {
-    font-size: 24px;
-    font-weight: 600;
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 6px;
+}
+
+.card .usd {
+    margin-top: 4px;
+    font-size: 15px;
+    color: #666;
+}
+
+/* ---------- Summary ---------- */
+.summary-row {
+    margin: 16px;
+    padding: 18px;
+    border-radius: 16px;
+    background: #fff;
+    border: 1px solid #ddd;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.recharge-btn {
+    padding: 16px;
+    width: 100%;
+    background: #ff0050;
+    color: #fff;
+    border: none;
+    border-radius: 14px;
+    font-size: 20px;
+    font-weight: bold;
     margin-top: 10px;
 }
 
-.card .usd {
-    font-size: 16px;
-    color: #777;
-    margin-top: 4px;
+.recharge-btn:disabled {
+    background: #ff8bb3;
 }
 
-/* 選取效果回復成原本 TikTok 那種 */
-.card.selected {
+/* ---------- Extra Banner ---------- */
+.extra-img-box {
+    padding: 0 16px;
+}
+
+.extra-img {
+    width: 100%;
+    border-radius: 14px;
+}
+
+/* ---------- Modal Overlay ---------- */
+.modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.45);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    z-index: 9999;
+}
+
+.modal.active {
+    display: flex;
+}
+
+/* ---------- Payment Modal ---------- */
+#paymentModal .modal-box {
+    width: 92%;
+    max-width: 420px;
+    background: #fff;
+    padding: 20px;
+    border-radius: 22px;
+}
+
+/* ---------- Payment Methods ---------- */
+.method-row {
+    margin-top: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.method {
+    padding: 14px;
+    border-radius: 12px;
+    border: 1px solid #ddd;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 17px;
+}
+
+.method.active {
     border: 2px solid #ff0050;
-    background: #ffe6f0;
+    background: #ffe6ef;
+}
+
+/* ---------- Buttons in Payment ---------- */
+.modal-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.modal-btn-red {
+    padding: 12px 22px;
+    border-radius: 12px;
+    background: #ff0050;
+    color: #fff;
+    border: none;
+    font-size: 16px;
+}
+
+/* ---------- Custom Modal ---------- */
+#customModal .modal-box {
+    width: 100%;
+    max-width: 480px;
+    height: 70vh;                 /* ⚡ 加大至 70% 螢幕高度 */
+    background: #fff;
+    padding: 20px;
+    border-radius: 28px 28px 0 0; /* ⚡ 底部彈窗效果 */
+    position: absolute;
+    bottom: 0;
+}
+
+/* 上方返回箭頭 */
+.custom-back {
+    font-size: 26px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    cursor: pointer;
+    width: 30px;
+}
+
+/* 主要輸入框 */
+#customInputBox {
+    padding: 14px;
+    border: 1px solid #ddd;
+    border-radius: 14px;
+    margin-bottom: 8px;
+    font-size: 28px;
+}
+
+/* 匯率顯示 */
+#customModalCoins,
+#customModalUSD {
+    font-size: 18px;
+    margin-bottom: 4px;
+    font-weight: bold;
+}
+
+/* 數字按鍵 */
+.number-grid {
+    margin-top: 12px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+}
+
+.number-grid button {
+    padding: 16px 0;
+    border-radius: 14px;
+    background: #f3f3f3;
+    border: none;
+    font-size: 20px;
+}
+
+#customRechargeBtn {
+    width: 100%;
+    margin-top: 18px;
+    padding: 16px;
+    border-radius: 14px;
+    background: #ff0050;
+    border: none;
+    color: #fff;
+    font-size: 20px;
+    font-weight: bold;
 }
