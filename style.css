@@ -432,3 +432,12 @@ body {
     font-size: 16px !important;
     border-radius: 12px !important;
 }
+/* === 自訂金額小窗（customModal）貼齊手機螢幕兩側 === */
+#customModal .modal-box.custom-box {
+    width: 100vw !important;     /* 直接吃滿螢幕寬 */
+    max-width: 100vw !important; /* 避免被原本 max-width 卡住 */
+    margin: 0 !important;
+    border-radius: 0 !important; /* 貼齊邊緣就不能有圓角 */
+    left: 0 !important;
+    right: 0 !important;
+}
