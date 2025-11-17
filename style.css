@@ -240,3 +240,20 @@ button:focus, .card:focus{box-shadow:0 0 0 3px rgba(255,0,85,0.12)}
 }
 
 /* 若覺得太粗，可改為 600 */
+/* ============================
+   1) 小窗再高一點（整個 modal）
+   ============================ */
+#customModal .modal-content {
+    max-height: 80vh !important;  /* 原本 70%，改成 80% */
+    height: 80vh !important;
+}
+
+/* ============================
+   2) 鍵盤字體更粗（不影響外面字體）
+   ============================ */
+.keypad button span,
+.keypad button {
+    font-weight: 800 !important;   /* 比之前更粗 */
+    color: #000 !important;        /* 保持黑色 */
+    font-size: 1.4rem !important;  /* 讓按鍵字體更清楚 */
+}
