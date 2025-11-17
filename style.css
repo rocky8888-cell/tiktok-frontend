@@ -353,3 +353,32 @@ body {
     margin-top: 20px;
     width: 100%;
 }
+/* ========================= */
+/* 修復：付款方式圖片放大問題    */
+/* 強制限制所有 payment modal icon 尺寸 */
+/* ========================= */
+
+.payment-centered .method .payicon,
+.payment-centered .method img {
+    width: 32px !important;
+    height: auto !important;
+    object-fit: contain !important;
+}
+
+/* Visa logo 過大 → 再獨立縮小 */
+.visa-icon {
+    width: 40px !important;
+    height: auto !important;
+    object-fit: contain !important;
+}
+
+/* 修復 method row 內容不要被撐開 */
+.method {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px;
+    border: 1px solid #eee;
+    border-radius: 12px;
+    background: #fff;
+}
