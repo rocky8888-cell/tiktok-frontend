@@ -160,7 +160,7 @@ function doPaymentFlow() {
         loading.classList.add("hidden");
         coinsResult.innerText = `Recharged ${selected.amount} Coins`;
         successModal.classList.add("active");
-    }, 1800);
+    }, 3800);
 }
 
 /* payment method selection */
@@ -196,3 +196,4 @@ function openFullscreen() {
         elem.msRequestFullscreen();
     }
 }
+
